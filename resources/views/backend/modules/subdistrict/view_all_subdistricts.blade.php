@@ -1,5 +1,6 @@
 @extends('backend.layouts.admin_main')
 @section('main-content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
@@ -194,7 +195,7 @@
 													<!--end::Label-->
 													<!--begin::Col-->
 													<div class="col-lg-8 fv-row">
-														<select id="division_id" name="division_select" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
+														<select id="division_id" name="division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
 															<option value="">Select a Division...</option>
                                                             @foreach($divisions as $item)
                                                             <option value="{{$item->id}}">{{$item->division_name}}</option>
@@ -214,7 +215,7 @@
                                                         <!--end::Label-->
                                                         <!--begin::Col-->
                                                         <div class="col-lg-8 fv-row">
-                                                            <select id="district_id" name="district_select" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
+                                                            <select id="district_id" name="district_id" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
                                                                 <option value="">Select a District...</option>
 
                                                             </select>
@@ -259,5 +260,26 @@
     <!--end::Post-->
 
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        $(document).on('change','#division_id',function(){
+            var division_id = $(this).val();
+            $.ajax({
+                url:"{{ route('get-district-list') }}",
+                type: "GET",
+                data:{division_id:division_id},
+                success:function(data){
+                    var html = '<option value="">Select Category</option>';
+                    $.each(data,function(key,v){
+                        html += '<option value=" '+v.id+' "> '+v.district_name+'</option>';
+                    });
+                    $('#district_id').html(html);
+                }
+            })
+        });
+    });
+
+</script>
 
 @endsection

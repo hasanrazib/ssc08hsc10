@@ -188,7 +188,7 @@
 													<!--end::Label-->
 													<!--begin::Col-->
 													<div class="col-lg-8 fv-row">
-														<select name="division_select" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
+														<select name="division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
 															<option value="">Select a Division...</option>
                                                             @foreach($divisions as $item)
                                                             <option value="{{$item->id}}">{{$item->division_name}}</option>

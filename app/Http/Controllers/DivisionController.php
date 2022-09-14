@@ -33,6 +33,7 @@ class DivisionController extends Controller
     //insert method
     public function insertDivision(Request $request){
 
+
         Division::insert([
             'division_name' => $request->division_name,
 

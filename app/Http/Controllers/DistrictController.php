@@ -35,7 +35,7 @@ class DistrictController extends Controller
 
         District::insert([
             'district_name' => $request->district_name,
-            'division_id' => $request->division_select,
+            'division_id' => $request->division_id,
 
         ]);
 

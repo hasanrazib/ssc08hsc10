@@ -13,11 +13,15 @@ class DefaultController extends Controller
 {
     //
 
+// get products by ajax filtering
+public function getDistrict(Request $request){
 
+    $division_id = $request->division_id;
 
+    $districts = District::where('division_id', $division_id)->get();
 
-
-
+    return response()->json($districts);
+} // end mehtod
 
 
 }

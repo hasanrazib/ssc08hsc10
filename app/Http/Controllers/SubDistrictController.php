@@ -36,8 +36,8 @@ class SubDistrictController extends Controller
 
         SubDistrict::insert([
             'sub_district_name' => $request->sub_district_name,
-            'district_id' => $request->district_select,
-            'division_id' => $request->division_select,
+            'district_id' => $request->district_id,
+            'division_id' => $request->division_id,
 
         ]);
         $notification = array(

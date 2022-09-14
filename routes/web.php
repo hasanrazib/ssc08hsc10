@@ -75,14 +75,12 @@ Route::controller(SubDistrictController::class)->group(function () {
 
 // Default Controller
 Route::controller(DefaultController::class)->group(function () {
-    Route::get('/get-district', 'test')->name('get-district');
-
+    Route::get('/get-district', 'getDistrict')->name('get-district-list');
 
 
 
 
 });
-
 
 Route::get('/dashboard', function () {
     return view('backend.dashboard');
