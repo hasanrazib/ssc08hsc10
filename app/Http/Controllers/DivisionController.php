@@ -44,6 +44,17 @@ class DivisionController extends Controller
     }//end method
 
 
+    //
+
+    public function editDivision($id){
+
+        $division = Division::findOrFail($id);
+
+        return response()->json($division);
+    }
+
+
+
     // delete method
       public function deleteDivision($id){
 
