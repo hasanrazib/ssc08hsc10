@@ -1,6 +1,6 @@
 @extends('backend.layouts.admin_main')
 @section('main-content')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
@@ -50,7 +50,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                             <!--begin::Add Sub District-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">Add New Division</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_division_add">Add New Division</button>
                             <!--end::Add Sub District-->
                         </div>
                         <!--end::Toolbar-->
@@ -108,7 +108,7 @@
                                 <!--begin::Action=-->
                                 <td>
                                     <div class="d-flex justify-content-end flex-shrink-0">
-                                        <a  href="{{route('edit.division', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card_edit">
+                                        <a id="div_id" href="{{route('edit.division', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_division_edit">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -118,7 +118,6 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        <a id="edit_divi" href="{{route('edit.division', $item->id)}}">ddd</a>
                                         <a href="{{route('delete.division', $item->id)}}" id="delete" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                             <span class="svg-icon svg-icon-3">
@@ -143,154 +142,143 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-
-            <!--begin::Modal - New Card-->
-								<div class="modal fade" id="kt_modal_new_card" tabindex="-3" aria-hidden="true">
-									<!--begin::Modal dialog-->
-									<div class="modal-dialog modal-dialog-centered mw-650px">
-										<!--begin::Modal content-->
-										<div class="modal-content">
-											<!--begin::Modal header-->
-											<div class="modal-header">
-												<!--begin::Modal title-->
-												<h2>Add Division</h2>
-												<!--end::Modal title-->
-												<!--begin::Close-->
-												<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-													<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-													<span class="svg-icon svg-icon-1">
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-															<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-															<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-														</svg>
-													</span>
-													<!--end::Svg Icon-->
-												</div>
-												<!--end::Close-->
-											</div>
-											<!--end::Modal header-->
-											<!--begin::Modal body-->
-											<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-												<!--begin::Form-->
-												<form id="kt_modal_new_card_form" class="form" action="{{route('insert.division')}}" method="POST">
-													@csrf
-                                                    <!--begin::Input group-->
-													<div class="d-flex flex-column mb-7 fv-row">
-														<!--begin::Label-->
-														<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-															<span class="required">Division Name</span>
-															<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a sub district's name"></i>
-														</label>
-														<!--end::Label-->
-														<input type="text"  class="form-control form-control-solid" placeholder="" name="division_name"/>
-													</div>
-													<!--end::Input group-->
-													<!--begin::Actions-->
-													<div class="text-center pt-15">
-														<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>
-														<button type="submit" id="kt_modal_new_card_submitd" class="btn btn-primary">
-															<span class="indicator-label">Submit</span>
-															<span class="indicator-progress">Please wait...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>
-													</div>
-													<!--end::Actions-->
-												</form>
-												<!--end::Form-->
-											</div>
-											<!--end::Modal body-->
-										</div>
-										<!--end::Modal content-->
-									</div>
-									<!--end::Modal dialog-->
-								</div>
-								<!--end::Modal - New Card-->
-                                <!--begin::Modal - New Card-->
-								<div class="modal fade" id="kt_modal_new_card_edit" tabindex="-1" aria-hidden="true">
-									<!--begin::Modal dialog-->
-									<div class="modal-dialog modal-dialog-centered mw-650px">
-										<!--begin::Modal content-->
-										<div class="modal-content">
-											<!--begin::Modal header-->
-											<div class="modal-header">
-												<!--begin::Modal title-->
-												<h2>Add Division</h2>
-												<!--end::Modal title-->
-												<!--begin::Close-->
-												<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-													<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-													<span class="svg-icon svg-icon-1">
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-															<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-															<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-														</svg>
-													</span>
-													<!--end::Svg Icon-->
-												</div>
-												<!--end::Close-->
-											</div>
-											<!--end::Modal header-->
-											<!--begin::Modal body-->
-											<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-												<!--begin::Form-->
-												<form id="kt_modal_new_card_form" class="form" action="{{route('insert.division')}}" method="POST">
-													@csrf
-                                                    <!--begin::Input group-->
-													<div class="d-flex flex-column mb-7 fv-row">
-														<!--begin::Label-->
-														<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-															<span class="required">Division Name d</span>
-															<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a sub district's name"></i>
-														</label>
-														<!--end::Label-->
-														<input type="text"  id="testtt" class="form-control form-control-solid" placeholder="" name="division_name"/>
-                                                        <h1 ></h1>
-                                                    </div>
-													<!--end::Input group-->
-													<!--begin::Actions-->
-													<div class="text-center pt-15">
-														<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>
-														<button type="submit" id="kt_modal_new_card_submitd" class="btn btn-primary">
-															<span class="indicator-label">Submit</span>
-															<span class="indicator-progress">Please wait...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>
-													</div>
-													<!--end::Actions-->
-												</form>
-												<!--end::Form-->
-											</div>
-											<!--end::Modal body-->
-										</div>
-										<!--end::Modal content-->
-									</div>
-									<!--end::Modal dialog-->
-								</div>
-								<!--end::Modal - New Card-->
+            <!--begin::Modal - Add New Division-->
+            <div class="modal fade" id="kt_modal_division_add" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>Add Division</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_division_add_form" class="form" action="{{route('insert.division')}}" method="POST">
+                                @csrf
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">Division Name</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a sub district's name"></i>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text"  class="form-control form-control-solid" placeholder="" name="division_name"/>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" id="kt_modal_division_cancel" class="btn btn-light me-3">Discard</button>
+                                    <button type="submit" id="kt_modal_division_submit" class="btn btn-primary">
+                                        <span class="indicator-label">Submit</span>
+                                        <span class="indicator-progress">Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <!--End::Modal - Add New Division-->
+ <!--begin::Modal - Edit New Division-->
+ <div class="modal fade" id="kt_modal_division_edit" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2>Edit Division</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                <form id="kt_modal_division_edit_form" class="form" action="{{route('insert.division')}}" method="POST">
+                    @csrf
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-7 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                            <span class="required">Division Name</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a sub district's name"></i>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text"  class="form-control form-control-solid" placeholder="" name="division_name"/>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" id="kt_modal_division_cancel" class="btn btn-light me-3">Discard</button>
+                        <button type="submit" id="kt_modal_division_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <div id="razib"></div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--End::Modal - Edit New Division-->
         </div>
         <!--end::Container-->
     </div>
     <!--end::Post-->
 
-</div>
+
+<h1>this is title</h1>
+
 
 
 <script type="text/javascript">
-    $(function(){
-        $(document).on('click','#edit_divi',function(){
-            var id = $(this).val();
-            console.log(id)
-            $.ajax({
-                url:"/division/' + id + '/edit",
-                type: "GET",
-                data:id,
-                success:function(data){
 
-                    $('#testtt').html(html);
-                }
-            })
-        });
-    });
+
+
 
 </script>
 

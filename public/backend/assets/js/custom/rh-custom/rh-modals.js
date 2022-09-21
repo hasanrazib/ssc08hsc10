@@ -1,7 +1,7 @@
 "use strict";
 
 // Class definition
-var KTModalNewCard = function () {
+var KTModal_division = function () {
 	var submitButton;
 	var cancelButton;
 	var validator;
@@ -9,20 +9,7 @@ var KTModalNewCard = function () {
 	var modal;
 	var modalEl;
 
-	// Init form inputs
-	var initForm = function() {
-		// Expiry month. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_month"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validator.revalidateField('card_expiry_month');
-        });
 
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_year"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validator.revalidateField('card_expiry_year');
-        });
-	}
 
 	// Handle form validation and submittion
 	var handleForm = function() {
@@ -33,11 +20,12 @@ var KTModalNewCard = function () {
 			form,
 			{
 				fields: {
-					'sub_district_name': {
+					'division_name': {
 						validators: {
 							notEmpty: {
-								message: 'Name on card is required'
+								message: 'Division Name should not be empty.'
 							}
+
 						}
 					},
 
@@ -94,7 +82,7 @@ var KTModalNewCard = function () {
 								}
 							});
 
-							//form.submit(); // Submit form
+							form.submit(); // Submit form
 						}, 2000);
 					} else {
 						// Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -151,7 +139,7 @@ var KTModalNewCard = function () {
 		// Public functions
 		init: function () {
 			// Elements
-			modalEl = document.querySelector('#kt_modal_new_card');
+			modalEl = document.querySelector('#kt_modal_division_add');
 
 			if (!modalEl) {
 				return;
@@ -159,11 +147,11 @@ var KTModalNewCard = function () {
 
 			modal = new bootstrap.Modal(modalEl);
 
-			form = document.querySelector('#kt_modal_new_card_form');
-			submitButton = document.getElementById('kt_modal_new_card_submit');
-			cancelButton = document.getElementById('kt_modal_new_card_cancel');
+			form = document.querySelector('#kt_modal_division_add_form');
+			submitButton = document.getElementById('kt_modal_division_submit');
+			cancelButton = document.getElementById('kt_modal_division_cancel');
 
-			initForm();
+
 			handleForm();
 		}
 	};
@@ -171,34 +159,15 @@ var KTModalNewCard = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-	KTModalNewCard.init();
+	KTModal_division.init();
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// division edit
 
 
 "use strict";
 
 // Class definition
-var KTModalNewCard_edit = function () {
+var KTModal_division_edit = function () {
 	var submitButton;
 	var cancelButton;
 	var validator;
@@ -206,20 +175,7 @@ var KTModalNewCard_edit = function () {
 	var modal;
 	var modalEl;
 
-	// Init form inputs
-	var initForm = function() {
-		// Expiry month. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_month"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validator.revalidateField('card_expiry_month');
-        });
 
-		// Expiry year. For more info, plase visit the official plugin site: https://select2.org/
-        $(form.querySelector('[name="card_expiry_year"]')).on('change', function() {
-            // Revalidate the field when an option is chosen
-            validator.revalidateField('card_expiry_year');
-        });
-	}
 
 	// Handle form validation and submittion
 	var handleForm = function() {
@@ -230,11 +186,12 @@ var KTModalNewCard_edit = function () {
 			form,
 			{
 				fields: {
-					'sub_district_name': {
+					'division_name': {
 						validators: {
 							notEmpty: {
-								message: 'Name on card is required'
+								message: 'Division Name should not be empty.'
 							}
+
 						}
 					},
 
@@ -291,7 +248,7 @@ var KTModalNewCard_edit = function () {
 								}
 							});
 
-							//form.submit(); // Submit form
+							form.submit(); // Submit form
 						}, 2000);
 					} else {
 						// Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -348,7 +305,7 @@ var KTModalNewCard_edit = function () {
 		// Public functions
 		init: function () {
 			// Elements
-			modalEl = document.querySelector('#kt_modal_new_card_edit');
+			modalEl = document.querySelector('#kt_modal_division_edit');
 
 			if (!modalEl) {
 				return;
@@ -356,11 +313,11 @@ var KTModalNewCard_edit = function () {
 
 			modal = new bootstrap.Modal(modalEl);
 
-			form = document.querySelector('#kt_modal_new_card_form');
-			submitButton = document.getElementById('kt_modal_new_card_submit');
-			cancelButton = document.getElementById('kt_modal_new_card_cancel');
+			form = document.querySelector('#kt_modal_division_edit_form');
+			submitButton = document.getElementById('kt_modal_division_submit');
+			cancelButton = document.getElementById('kt_modal_division_cancel');
 
-			initForm();
+
 			handleForm();
 		}
 	};
@@ -368,47 +325,5 @@ var KTModalNewCard_edit = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-	KTModalNewCard_edit.init();
+	KTModal_division_edit.init();
 });
-
-
-$(function(){
-    $(document).on('click','#delete',function(e){
-        e.preventDefault();
-        var link = $(this).attr("href");
-
-
-                  Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Delete This Data?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      window.location.href = link
-                      Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                      )
-                    }
-                  })
-
-
-    });
-
-  });
-
-
-  $("#kt_sweetalert_demo_6").click(function(e) {
-    Swal.fire({
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 4000
-    });
-});
-

@@ -33,9 +33,8 @@ Route::controller(AdminController::class)->group(function () {
 
 // Division All Route
 Route::controller(DivisionController::class)->group(function () {
-    Route::get('/division/add', 'addDivision')->name('add.division');
     Route::post('/division/insert', 'insertDivision')->name('insert.division');
-    Route::get('/division/{id}/edit','editDivision')->name('edit.division');
+    Route::get('/division/edit/{id}','editDivision')->name('edit.division');
     Route::post('/division/update/','updateDivision')->name('update.division');
     Route::get('/division/delete/{id}','deleteDivision')->name('delete.division');
     Route::get('/division/all', 'viewAllDivision')->name('view.divisions');

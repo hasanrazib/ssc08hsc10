@@ -34,10 +34,12 @@ class DivisionController extends Controller
     public function insertDivision(Request $request){
 
 
-        Division::insert([
-            'division_name' => $request->division_name,
+            Division::insert([
+                'division_name' => $request->division_name,
 
-        ]);
+            ]);
+
+
 
         return redirect()->route('view.divisions');
 
@@ -46,9 +48,9 @@ class DivisionController extends Controller
 
     //
 
-    public function editDivision($id){
+    public function editDivision(Request $request){
 
-        $division = Division::findOrFail($id);
+        $division = Division::where('id',$request->id)->get();
 
         return response()->json($division);
     }

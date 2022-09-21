@@ -38,6 +38,8 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="{{asset('backend/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('backend/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+        <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -96,7 +98,9 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="{{asset('backend/assets/js/custom/modals/create-app.js')}}"></script>
 		<script src="{{asset('backend/assets/js/custom/modals/upgrade-plan.js')}}"></script>
 		<!--end::Page Custom Javascript-->
-        <script src="{{asset('backend/assets/js/custom/main.js')}}"></script>
+        <!--begin::My Custom Javascript(used by this page)-->
+        <script src="{{asset('backend/assets/js/custom/rh-custom/rh-modals.js')}}"></script>
+        <script src="{{asset('backend/assets/js/custom/rh-custom/main.js')}}"></script>
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->
