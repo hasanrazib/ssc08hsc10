@@ -1,6 +1,6 @@
 @extends('backend.layouts.admin_main')
 @section('main-content')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
@@ -50,7 +50,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                             <!--begin::Add Sub District-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card">Add New District</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_district_add">Add New District</button>
                             <!--end::Add Sub District-->
                         </div>
                         <!--end::Toolbar-->
@@ -114,7 +114,7 @@
                                 <!--begin::Action=-->
                                 <td>
                                     <div class="d-flex justify-content-end flex-shrink-0">
-                                        <a id="razib" href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_customer">
+                                        <a onclick="editData('{{ $item->id}}')" href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_district_edit">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -148,87 +148,164 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-            <!--begin::Modal - New Card-->
-								<div class="modal fade" id="kt_modal_new_card" tabindex="-3" aria-hidden="true">
-									<!--begin::Modal dialog-->
-									<div class="modal-dialog modal-dialog-centered mw-650px">
-										<!--begin::Modal content-->
-										<div class="modal-content">
-											<!--begin::Modal header-->
-											<div class="modal-header">
-												<!--begin::Modal title-->
-												<h2>Add District</h2>
-												<!--end::Modal title-->
-												<!--begin::Close-->
-												<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-													<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-													<span class="svg-icon svg-icon-1">
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-															<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-															<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-														</svg>
-													</span>
-													<!--end::Svg Icon-->
-												</div>
-												<!--end::Close-->
-											</div>
-											<!--end::Modal header-->
-											<!--begin::Modal body-->
-											<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-												<!--begin::Form-->
-												<form id="kt_modal_new_card_form" class="form" action="{{route('insert.district')}}" method="POST">
-													@csrf
-                                                    <!--begin::Input group-->
-												<div class="row mb-6">
-													<!--begin::Label-->
-													<label class="col-lg-4 col-form-label fw-bold fs-6">
-														<span class="required">Division</span>
-														<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i>
-													</label>
-													<!--end::Label-->
-													<!--begin::Col-->
-													<div class="col-lg-8 fv-row">
-														<select name="division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
-															<option value="">Select a Division...</option>
-                                                            @foreach($divisions as $item)
-                                                            <option value="{{$item->id}}">{{$item->division_name}}</option>
-                                                            @endforeach
-														</select>
-													</div>
-													<!--end::Col-->
-												</div>
-												<!--end::Input group-->
-                                                    <!--begin::Input group-->
-													<div class="d-flex flex-column mb-7 fv-row">
-														<!--begin::Label-->
-														<label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-															<span class="required">District Name</span>
-															<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a district's name"></i>
-														</label>
-														<!--end::Label-->
-														<input type="text" class="form-control form-control-solid" placeholder="" name="district_name"/>
-													</div>
-													<!--end::Input group-->
-													<!--begin::Actions-->
-													<div class="text-center pt-15">
-														<button type="reset" id="kt_modal_new_card_cancel" class="btn btn-light me-3">Discard</button>
-														<button type="submit" id="kt_modal_new_card_submitd" class="btn btn-primary">
-															<span class="indicator-label">Submit</span>
-															<span class="indicator-progress">Please wait...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-														</button>
-													</div>
-													<!--end::Actions-->
-												</form>
-												<!--end::Form-->
-											</div>
-											<!--end::Modal body-->
-										</div>
-										<!--end::Modal content-->
-									</div>
-									<!--end::Modal dialog-->
-								</div>
-								<!--end::Modal - New Card-->
+            <!--begin::Modal - District -->
+            <div class="modal fade" id="kt_modal_district_add" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>Add District</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_district_add_form" class="form" action="{{route('insert.district')}}" method="POST">
+                                @csrf
+                                <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                    <span class="required">Division</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <select name="division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
+                                        <option value="">Select a Division...</option>
+                                        @foreach($divisions as $item)
+                                        <option value="{{$item->id}}">{{$item->division_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-7 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                    <span class="required">District Name</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a district's name"></i>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="" name="district_name"/>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                            <div class="text-center pt-15">
+                                <button type="reset" id="kt_modal_district_cancel" class="btn btn-light me-3">Discard</button>
+                                <button type="submit" id="kt_modal_district_submit" class="btn btn-primary">
+                                    <span class="indicator-label">Submit</span>
+                                    <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <!--end::Modal - District Add -->
+            <!--begin::Modal - Edit District -->
+            <div class="modal fade" id="kt_modal_district_edit" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header">
+                            <!--begin::Modal title-->
+                            <h2>Edit District</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_division_edit_form" class="form" action="{{route('update.division')}}" method="POST">
+                                @csrf
+                               <!--begin::Input group-->
+                                 <div class="row mb-6">
+                                 <!--begin::Label-->
+                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                    <span class="required">Division</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i>
+                                </label>
+                                <!--end::Label-->
+                                 <!--begin::Col-->
+                                <div class="col-lg-8 fv-row" >
+                                    <div id="select_div"></div>
+                                </div>
+                                <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-column mb-7 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+                                        <span class="required">District Name</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a district's name"></i>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div id="district_name"></div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" id="kt_modal_division_cancel_e" class="btn btn-light me-3">Discard</button>
+                                    <button type="submit" id="kt_modal_division_submit_e" class="btn btn-primary">
+                                        <span class="indicator-label">Submit</span>
+                                        <span class="indicator-progress">Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <!--End::Modal - Edit New Division-->
         </div>
         <!--end::Container-->
     </div>
@@ -236,4 +313,38 @@
 
 </div>
 
+<script type="text/javascript">
+
+    function editData(id){
+
+        $.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"/district/edit/" + id,
+
+            success:function(data){
+
+                var html = '';
+                var select_division = '';
+                $.each(data,function(key,v){
+
+                    select_division += '<select name="select_division" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">';
+                    select_division += '<option value="'+v.division_id+'">'+v.division_id+'</option>';
+                    select_division += '</select>';
+
+                    html += '<input type="hidden"  class="form-control form-control-solid" value="'+v.id+'" name="id"/>';
+                    html += '<input type="text"  class="form-control form-control-solid" value="'+v.district_name+'" name="division_name"/>';
+
+                });
+
+                $('#district_name').html(html);
+                $('#select_div').html(select_division);
+            }
+        })
+
+
+    }
+
+
+    </script>
 @endsection

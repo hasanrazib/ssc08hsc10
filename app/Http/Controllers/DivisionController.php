@@ -16,48 +16,51 @@ class DivisionController extends Controller
     public function viewAllDivision(){
 
         $divisions = Division::latest()->get();
+
         return view('backend.modules.division.view_all_divisions',compact('divisions'));
 
     }//end method
 
-    // add category
-    public function addDivision(){
-
-        return view('backend.division.add_division');
-
-    }// end method
-
-
-
-
     //insert method
     public function insertDivision(Request $request){
 
-
             Division::insert([
                 'division_name' => $request->division_name,
+                'created_at' => Carbon::now(),
 
             ]);
-
-
 
         return redirect()->route('view.divisions');
 
     }//end method
 
 
-    //
+    // edit ajax modal
 
     public function editDivision(Request $request){
 
         $division = Division::where('id',$request->id)->get();
-
         return response()->json($division);
-    }
+
+    }//end method
 
 
+    // update method
+    public function updateDivision(Request $request){
 
-    // delete method
+        $division_id = $request->id;
+
+        Division::findOrFail($division_id)->update([
+            'division_name' => $request->division_name,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        return redirect()->route('view.divisions');
+
+    }// end method
+
+    // delete method for single item
       public function deleteDivision($id){
 
         Division::findOrFail($id)->delete();

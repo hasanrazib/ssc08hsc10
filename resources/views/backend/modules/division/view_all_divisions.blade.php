@@ -108,7 +108,7 @@
                                 <!--begin::Action=-->
                                 <td>
                                     <div class="d-flex justify-content-end flex-shrink-0">
-                                        <a id="div_id" href="{{route('edit.division', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_division_edit">
+                                        <a id="div_id" onclick="editData('{{ $item->id}}')" href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#kt_modal_division_edit" data-id="3">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -118,6 +118,7 @@
                                             </span>
                                             <!--end::Svg Icon-->
                                         </a>
+
                                         <a href="{{route('delete.division', $item->id)}}" id="delete" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                             <span class="svg-icon svg-icon-3">
@@ -203,8 +204,8 @@
                 <!--end::Modal dialog-->
             </div>
             <!--End::Modal - Add New Division-->
- <!--begin::Modal - Edit New Division-->
- <div class="modal fade" id="kt_modal_division_edit" tabindex="-1" aria-hidden="true">
+<!--begin::Modal - Edit New Division-->
+<div class="modal fade" id="kt_modal_division_edit" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -231,8 +232,9 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_division_edit_form" class="form" action="{{route('insert.division')}}" method="POST">
+                <form id="kt_modal_division_edit_form" class="form" action="{{route('update.division')}}" method="POST">
                     @csrf
+                    <input type="hidden" name="id" value="">
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-7 fv-row">
                         <!--begin::Label-->
@@ -241,19 +243,19 @@
                             <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a sub district's name"></i>
                         </label>
                         <!--end::Label-->
-                        <input type="text"  class="form-control form-control-solid" placeholder="" name="division_name"/>
+                        <div id="division_name"></div>
                     </div>
                     <!--end::Input group-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" id="kt_modal_division_cancel" class="btn btn-light me-3">Discard</button>
-                        <button type="submit" id="kt_modal_division_submit" class="btn btn-primary">
+                        <button type="reset" id="kt_modal_division_cancel_e" class="btn btn-light me-3">Discard</button>
+                        <button type="submit" id="kt_modal_division_submit_e" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                     </div>
-                    <div id="razib"></div>
+
                     <!--end::Actions-->
                 </form>
                 <!--end::Form-->
@@ -271,13 +273,30 @@
     <!--end::Post-->
 
 
-<h1>this is title</h1>
-
-
 
 <script type="text/javascript">
 
+function editData(id){
 
+    $.ajax({
+        type:"GET",
+        dataType: "json",
+        url:"/division/edit/" + id,
+
+        success:function(data){
+
+            var html = '';
+
+            $.each(data,function(key,v){
+                html += '<input type="hidden"  class="form-control form-control-solid" value="'+v.id+'" name="id"/>';
+                html += '<input type="text"  class="form-control form-control-solid" value="'+v.division_name+'" name="division_name"/>';
+
+            });
+
+            $('#division_name').html(html);
+        }
+    })
+}
 
 
 </script>

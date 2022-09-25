@@ -44,6 +44,20 @@ class DistrictController extends Controller
     }//end method
 
 
+    // edit ajax modal
+
+    public function editDistrict(Request $request){
+
+        $division = District::where('id',$request->id)->get();
+
+        return response()->json($division);
+
+    }//end method
+
+
+
+
+
     // delete method
       public function deleteDistrict($id){
 
