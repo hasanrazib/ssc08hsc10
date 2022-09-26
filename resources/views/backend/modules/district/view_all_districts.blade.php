@@ -213,7 +213,7 @@
                             <div class="text-center pt-15">
                                 <button type="reset" id="kt_modal_district_cancel" class="btn btn-light me-3">Discard</button>
                                 <button type="submit" id="kt_modal_district_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Submit</span>
+                                    <span class="indicator-label">Add</span>
                                     <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
@@ -257,23 +257,9 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_division_edit_form" class="form" action="{{route('update.division')}}" method="POST">
+                            <form id="kt_modal_division_edit_form" class="form" action="{{route('update.district')}}" method="POST">
                                 @csrf
-                               <!--begin::Input group-->
-                                 <div class="row mb-6">
-                                 <!--begin::Label-->
-                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span class="required">Division</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i>
-                                </label>
-                                <!--end::Label-->
-                                 <!--begin::Col-->
-                                <div class="col-lg-8 fv-row" >
-                                    <div id="select_div"></div>
-                                </div>
-                                <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+
                                 <!--begin::Input group-->
                                 <div class="d-flex flex-column mb-7 fv-row">
                                     <!--begin::Label-->
@@ -289,7 +275,7 @@
                                 <div class="text-center pt-15">
                                     <button type="reset" id="kt_modal_division_cancel_e" class="btn btn-light me-3">Discard</button>
                                     <button type="submit" id="kt_modal_division_submit_e" class="btn btn-primary">
-                                        <span class="indicator-label">Submit</span>
+                                        <span class="indicator-label">Update</span>
                                         <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
@@ -328,17 +314,17 @@
                 var select_division = '';
                 $.each(data,function(key,v){
 
-                    select_division += '<select name="select_division" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">';
-                    select_division += '<option value="'+v.division_id+'">'+v.division_id+'</option>';
-                    select_division += '</select>';
-
+                   // select_division += '<select name="select_division" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">';
+                  //  select_division += '<option value="'+v.division_id+'">'+v.division_name+'</option>';
+                    //select_division += '</select>';
+                    //select_division += v.division_id;
                     html += '<input type="hidden"  class="form-control form-control-solid" value="'+v.id+'" name="id"/>';
-                    html += '<input type="text"  class="form-control form-control-solid" value="'+v.district_name+'" name="division_name"/>';
+                    html += '<input type="text"  class="form-control form-control-solid" value="'+v.district_name+'" name="district_name"/>';
 
                 });
 
                 $('#district_name').html(html);
-                $('#select_div').html(select_division);
+              //  $('#select_div').html(select_division);
             }
         })
 

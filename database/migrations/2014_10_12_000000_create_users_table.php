@@ -20,6 +20,14 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role_id')->default('0');
+            $table->text('present_address_line')->default('Update Your Present Address Line');
+            $table->integer('present_subdistrict_id')->default('0');
+            $table->integer('present_district_id')->default('0');
+            $table->integer('present_division_id')->default('0');
+            $table->text('permanent_address_line')->default('Update Your Permanent Address Line');
+            $table->integer('permanent_subdistrict_id')->default('0');
+            $table->integer('permanent_district_id')->default('0');
+            $table->integer('permanent_division_id')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

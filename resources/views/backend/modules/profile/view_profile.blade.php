@@ -13,7 +13,7 @@
                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                 <!--end::Separator-->
                 <!--begin::Description-->
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">#DHK-TAN-45670</small>
+                <small class="text-muted fs-7 fw-bold my-1 ms-1">#DHK-TAN-</small>
                 <!--end::Description--></h1>
                 <!--end::Title-->
             </div>
@@ -330,7 +330,7 @@
                 </div>
                 <!--end::Card title-->
                 <!--begin::Action-->
-                <a href="../../demo1/dist/account/settings.html" class="btn btn-primary align-self-center">Edit Profile</a>
+                <a href="{{route('admin.edit.profile', $adminData->id)}}" class="btn btn-primary align-self-center">Edit Profile</a>
                 <!--end::Action-->
             </div>
             <!--begin::Card header-->
@@ -563,7 +563,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Holding: 907, Village: Nalua, Road: Nalua <br> Post-office: Nalua Bazar</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{$adminData->present_address_line}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -575,7 +575,9 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Sakhipur</span>
+                        <span class="fw-bolder text-gray-800 fs-6">
+                            @if(isset($adminData->presentSubDistrict['sub_district_name'])){{$adminData->presentSubDistrict['sub_district_name']}}  @endif
+                        </span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -583,11 +585,12 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Distric</label>
+                    <label class="col-lg-4 fw-bold text-muted">District</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Tangail</span>
+                        <span class="fw-bolder text-gray-800 fs-6"> @if(isset($adminData->presentDistrict['district_name'])){{$adminData->presentDistrict['district_name']}}  @endif
+                         </span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -599,7 +602,9 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Dhaka</span>
+                        <span class="fw-bolder text-gray-800 fs-6">@if(isset($adminData->presentDivision['division_name'])){{$adminData->presentDivision['division_name']}}  @endif
+
+                        </span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -618,7 +623,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8">
-                                <span class="fw-bolder fs-6 text-gray-800">Holding: 907, Village: Nalua, Road: Nalua <br> Post-office: Nalua Bazar</span>
+                                <span class="fw-bolder fs-6 text-gray-800">{{$adminData->permanent_address_line}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -630,7 +635,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Sakhipur</span>
+                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($adminData->permanentSubDistrict['sub_district_name'])){{$adminData->permanentSubDistrict['sub_district_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -642,7 +647,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Tangail</span>
+                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($adminData->permanentDistrict['district_name'])){{$adminData->permanentDistrict['district_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -653,8 +658,9 @@
                             <label class="col-lg-4 fw-bold text-muted">Division</label>
                             <!--end::Label-->
                             <!--begin::Col-->
+
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Dhaka</span>
+                                <span class="fw-bolder text-gray-800 fs-6"> @if(isset($adminData->permanentDivision['division_name'])){{$adminData->permanentDivision['division_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>

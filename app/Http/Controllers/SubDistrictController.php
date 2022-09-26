@@ -23,13 +23,6 @@ class SubDistrictController extends Controller
 
     }//end method
 
-    // add sub district
-     public function addSubDistrict(){
-
-        return view('backend.modules.subdistrict.add_subdistrict');
-
-    }// end method
-
 
     //insert method
     public function insertSubDistrict(Request $request){
@@ -49,6 +42,34 @@ class SubDistrictController extends Controller
 
 
     }//end method
+
+
+
+    // edit ajax modal
+
+    public function editSubDistrict($id){
+
+        $subdistrict = SubDistrict::where('id', $id)->get();
+
+        return response()->json($subdistrict);
+
+    }//end method
+
+
+    // update method
+    public function updateSubDistrict(Request $request){
+
+        $sub_id = $request->id;
+
+        SubDistrict::findOrFail($sub_id)->update([
+            'sub_district_name' => $request->sub_district_name,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        return redirect()->route('view.subdistricts');
+
+    }// end method
 
 
     // delete method

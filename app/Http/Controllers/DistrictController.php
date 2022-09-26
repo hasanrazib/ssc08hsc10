@@ -20,16 +20,6 @@ class DistrictController extends Controller
 
     }//end method
 
-    // add category
-    public function addDivision(){
-
-        return view('backend.division.add_division');
-
-    }// end method
-
-
-
-
     //insert method
     public function insertDistrict(Request $request){
 
@@ -55,6 +45,20 @@ class DistrictController extends Controller
     }//end method
 
 
+    // update method
+    public function updateDistrict(Request $request){
+
+        $district_id = $request->id;
+
+        District::findOrFail($district_id)->update([
+            'district_name' => $request->district_name,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        return redirect()->route('view.districts');
+
+    }// end method
 
 
 

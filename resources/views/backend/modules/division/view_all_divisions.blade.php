@@ -188,7 +188,7 @@
                                 <div class="text-center pt-15">
                                     <button type="reset" id="kt_modal_division_cancel" class="btn btn-light me-3">Discard</button>
                                     <button type="submit" id="kt_modal_division_submit" class="btn btn-primary">
-                                        <span class="indicator-label">Submit</span>
+                                        <span class="indicator-label">Add</span>
                                         <span class="indicator-progress">Please wait...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
@@ -250,7 +250,7 @@
                     <div class="text-center pt-15">
                         <button type="reset" id="kt_modal_division_cancel_e" class="btn btn-light me-3">Discard</button>
                         <button type="submit" id="kt_modal_division_submit_e" class="btn btn-primary">
-                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-label">Update</span>
                             <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>

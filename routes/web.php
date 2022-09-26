@@ -27,6 +27,8 @@ Route::get('/', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
+    Route::get('/admin/edit/{id}', 'editProfile')->name('admin.edit.profile');
+    Route::post('/admin/update/', 'updateProfile')->name('admin.update.profile');
 
 
 });
@@ -45,7 +47,6 @@ Route::controller(DivisionController::class)->group(function () {
 
 // District All Route
 Route::controller(DistrictController::class)->group(function () {
-    Route::get('/district/add', 'addDistrict')->name('add.district');
     Route::post('/district/insert', 'insertDistrict')->name('insert.district');
     Route::get('/district/edit/{id}','editDistrict')->name('edit.district');
     Route::post('/district/update/','updateDistrict')->name('update.district');
@@ -60,10 +61,9 @@ Route::controller(DistrictController::class)->group(function () {
 // Sub District All Route
 
 Route::controller(SubDistrictController::class)->group(function () {
-    Route::get('/subdistrict/add', 'addSubDistrict')->name('add.subdistrict');
     Route::post('/subdistrict/insert', 'insertSubDistrict')->name('insert.subdistrict');
-    Route::get('/subdistrict/edit','editSubDistrict')->name('edit.subdistrict');
-    //Route::post('/subdistrict/update/','updateSubDistrict')->name('update.subdistrict');
+    Route::get('/subdistrict/edit/{id}','editSubDistrict')->name('edit.subdistrict');
+    Route::post('/subdistrict/update/','updateSubDistrict')->name('update.subdistrict');
     Route::get('/subdistrict/delete/{id}','deleteSubDistrict')->name('delete.subdistrict');
     Route::get('/subdistrict/all', 'viewAllSubDistrict')->name('view.subdistricts');
 
@@ -75,6 +75,8 @@ Route::controller(SubDistrictController::class)->group(function () {
 // Default Controller
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-district', 'getDistrict')->name('get-district-list');
+    Route::get('/get-district-another', 'getDistrictAnother')->name('get-district-list-another');
+    Route::get('/get-subdistrict', 'getSubDistrict')->name('get-sub-district-list');
 
 
 
