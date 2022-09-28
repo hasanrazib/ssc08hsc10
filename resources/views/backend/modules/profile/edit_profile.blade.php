@@ -308,12 +308,12 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="../../demo1/dist/account/overview.html">Overview</a>
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.profile')}}">Overview</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="../../demo1/dist/account/settings.html">Settings</a>
+                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.edit.profile', $single_user->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -331,105 +331,265 @@
                     <h3 class="fw-bolder m-0">Profile Details</h3>
                 </div>
                 <!--end::Card title-->
-                <!--begin::Action-->
-                <a href="" class="btn btn-primary align-self-center">Edit Profile</a>
-                <!--end::Action-->
             </div>
             <!--begin::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body p-9">
-                <!--begin::Row-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Full Name</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Max Smith</span>
+            <!--begin::Content-->
+            <div id="kt_account_profile_details" class="collapse show">
+                <!--begin::Form-->
+                <form id="kt_account_profile_details_form" class="form">
+                    <!--begin::Card body-->
+                    <div class="card-body border-top p-9">
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/150-26.jpg)"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+                                <!--begin::Hint-->
+                                <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                <!--end::Hint-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Row-->
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6 fv-row">
+                                        <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="Smith" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                <span class="required">Contact Phone</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="" />
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Blood Group</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <!--begin::Input-->
+                                <select name="blood_group" aria-label="Select a Language" data-control="select2" data-placeholder="Select a blood..." class="form-select form-select-solid form-select-lg">
+                                    <option value="">Select a Blood Group...</option>
+                                    <option  value="id">O+</option>
+                                    <option  value="id">O-</option>
+                                    <option  value="id">AB+</option>
+                                </select>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                         <!--begin::Input group-->
+                         <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Gender</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select name="gender_id" aria-label="Select a gender" data-control="select2" data-placeholder="Select a gender.." class="form-select form-select-solid form-select-lg">
+                                    <option value="">Select a Gender..</option>
+                                    <option  value="1">Male</option>
+                                    <option  value="2">Female</option>
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Marital Status</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <!--begin::Input-->
+                                <select name="marital_status" aria-label="Select a marital status" data-control="select2" data-placeholder="Select a marital status..." class="form-select form-select-solid form-select-lg">
+                                    <option value="">Select your marital Status...</option>
+                                    <option  value="1">Unmarrid</option>
+                                    <option  value="1">Married</option>
+                                    <option  value="1">Widow</option>
+                                    <option  value="1">Separate</option>
+                                </select>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                         <!--begin::Input group-->
+                         <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Religion</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select name="religion_id" aria-label="Select a religion" data-control="select2" data-placeholder="Select a religion.." class="form-select form-select-solid form-select-lg">
+                                    <option value="">Select a Religion..</option>
+                                    <option  value="1">Islam</option>
+                                    <option  value="2">Hindu</option>
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">Currency</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select name="currnecy" aria-label="Select a Timezone" data-control="select2" data-placeholder="Select a currency.." class="form-select form-select-solid form-select-lg">
+                                    <option value="">Select a currency..</option>
+                                    <option data-kt-flag="flags/united-states.svg" value="USD">
+                                    <b>USD</b>&#160;-&#160;USA dollar</option>
+                                    <option data-kt-flag="flags/united-kingdom.svg" value="GBP">
+                                    <b>GBP</b>&#160;-&#160;British pound</option>
+                                    <option data-kt-flag="flags/australia.svg" value="AUD">
+                                    <b>AUD</b>&#160;-&#160;Australian dollar</option>
+                                    <option data-kt-flag="flags/japan.svg" value="JPY">
+                                    <b>JPY</b>&#160;-&#160;Japanese yen</option>
+                                    <option data-kt-flag="flags/sweden.svg" value="SEK">
+                                    <b>SEK</b>&#160;-&#160;Swedish krona</option>
+                                    <option data-kt-flag="flags/canada.svg" value="CAD">
+                                    <b>CAD</b>&#160;-&#160;Canadian dollar</option>
+                                    <option data-kt-flag="flags/switzerland.svg" value="CHF">
+                                    <b>CHF</b>&#160;-&#160;Swiss franc</option>
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Communication</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <!--begin::Options-->
+                                <div class="d-flex align-items-center mt-3">
+                                    <!--begin::Option-->
+                                    <label class="form-check form-check-inline form-check-solid me-5">
+                                        <input class="form-check-input" name="communication[]" type="checkbox" value="1" />
+                                        <span class="fw-bold ps-2 fs-6">Email</span>
+                                    </label>
+                                    <!--end::Option-->
+                                    <!--begin::Option-->
+                                    <label class="form-check form-check-inline form-check-solid">
+                                        <input class="form-check-input" name="communication[]" type="checkbox" value="2" />
+                                        <span class="fw-bold ps-2 fs-6">Phone</span>
+                                    </label>
+                                    <!--end::Option-->
+                                </div>
+                                <!--end::Options-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-0">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">Allow Marketing</label>
+                            <!--begin::Label-->
+                            <!--begin::Label-->
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <div class="form-check form-check-solid form-switch fv-row">
+                                    <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing" checked="checked" />
+                                    <label class="form-check-label" for="allowmarketing"></label>
+                                </div>
+                            </div>
+                            <!--begin::Label-->
+                        </div>
+                        <!--end::Input group-->
                     </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">Keenthemes</span>
+                    <!--end::Card body-->
+                    <!--begin::Actions-->
+                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                        <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
                     </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Contact Phone
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 d-flex align-items-center">
-                        <span class="fw-bolder fs-6 text-gray-800 me-2">044 3276 454 935</span>
-                        <span class="badge badge-success">Verified</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company Site</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">keenthemes.com</a>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Country
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Germany</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Communication</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Email, Phone</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-10">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Allow Changes</label>
-                    <!--begin::Label-->
-                    <!--begin::Label-->
-                    <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800">Yes</span>
-                    </div>
-                    <!--begin::Label-->
-                </div>
-                <!--end::Input group-->
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
             </div>
-            <!--end::Card body-->
+		    <!--end::Content-->
         </div>
         <!--end::details View-->
          <!--begin::details View-->
+         <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}">
+            @csrf
          <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->
             <div class="card-header cursor-pointer">
@@ -442,103 +602,92 @@
             <!--begin::Card header-->
             <div class="row">
                 <div class="col-xl-6">
-            <!--begin::Card body-->
-            <div class="card-body p-9 card-dashed">
+                <!--begin::Card body-->
+                <div class="card-body p-9 card-dashed">
                 <h3 class="card-title mb-7">Work History</h3>
-                <!--begin::Row-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Job Title/ Designation</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800"> Lead Web Developer</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
                 <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company Name</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Astute Horse</span>
-                    </div>
-                    <!--end::Col-->
+                <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-bold fs-6">Job Title</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="job_title" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
                 </div>
-                <!--end::Input group-->
+                <!--end::Col-->
+                </div>
+				<!--end::Input group-->
                 <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Industry:</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Technology</span>
-                    </div>
-                    <!--end::Col-->
+                <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-bold fs-6">Company Name</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="company_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                </div>
+                <!--end::Col-->
+                </div>
+				<!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-bold fs-6">Location</label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8 fv-row">
+                    <textarea name="company_location" class="form-control form-control-solid" rows="3" placeholder=""></textarea>
+                </div>
+                <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-                 <!--begin::Input group-->
-                 <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Location</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">House: 121, Road: 08, Gulshan - 1, Dhaka- 1212</span>
-                    </div>
-                    <!--end::Col-->
                 </div>
-                <!--end::Input group-->
-            </div>
-            <!--end::Card body-->
+                 <!--end::Card body-->
                 </div>
                 <div class="col-xl-6">
                     <!--begin::Card body-->
                     <div class="card-body p-9 card-dashed">
                         <h3 class="card-title mb-7">Education History</h3>
-                        <!--begin::Row-->
-                        <div class="row mb-7">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 fw-bold text-muted">University:</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8">
-                                <span class="fw-bolder fs-6 text-gray-800">Southeast University<span>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
                         <!--begin::Input group-->
-                        <div class="row mb-7">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 fw-bold text-muted">College:</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Cambrian College</span>
-                            </div>
-                            <!--end::Col-->
+                        <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">University Name</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" name="university_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                        </div>
+                        <!--end::Col-->
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
-                        <div class="row mb-7">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 fw-bold text-muted">School</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Nalua Based Khan High School</span>
-                            </div>
-                            <!--end::Col-->
+                        <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">College Name</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" name="college_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                        </div>
+                        <!--end::Col-->
                         </div>
                         <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">School Name</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" name="school_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                        </div>
+                        <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
                     </div>
                     <!--end::Card body-->
-                        </div>
+                </div>
             </div> <!-- end row -->
         </div>
         <!--end::details View-->
@@ -556,8 +705,7 @@
             <div class="row">
                 <div class="col-xl-6">
                     <!--begin::Form-->
-                    <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}">
-                        @csrf
+
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -624,6 +772,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-12 fv-row">
                                 <textarea name="present_address_line" class="form-control form-control-solid" rows="3" placeholder="Ex. Village/Street/Road...">{{$single_user->present_address_line}}</textarea>
+                            </div>
                             <!--end::Col-->
                             <!--begin::Actions-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -635,21 +784,6 @@
                     </form>
                     <!--end::Form-->
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <div class="col-xl-6">
                     <!--begin::Card body-->
                     <div class="card-body p-9 card-dashed">

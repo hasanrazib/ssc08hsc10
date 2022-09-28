@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\SubDistrictController;
+use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\DefaultController;
 
 /*
@@ -78,6 +79,25 @@ Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-district-another', 'getDistrictAnother')->name('get-district-list-another');
     Route::get('/get-subdistrict', 'getSubDistrict')->name('get-sub-district-list');
 
+
+
+
+});
+
+// Genaral Setting All
+
+Route::controller(GeneralSettingController::class)->group(function () {
+    Route::post('/blood-group/insert', 'insertBloodGroup')->name('insert.blood');
+    Route::get('/get-blood/edit/{id}', 'editBlood')->name('edit.blood'); // ajax
+    Route::post('/blood-group/update/','updateBlood')->name('update.blood');
+    Route::get('/blood-group/delete/{id}','deleteBloodGroup')->name('delete.blood');
+    Route::get('/blood-group/all', 'viewBloodGroup')->name('view.bloods');
+
+    Route::post('/marital-status/insert', 'insertMarital')->name('insert.marital');
+    Route::get('/get-marital-status/edit/{id}', 'editMarital')->name('edit.marital'); // ajax
+    Route::post('/marital-status/update/','updateMarital')->name('update.marital');
+    Route::get('/marital-status/delete/{id}','deleteMarital')->name('delete.marital');
+    Route::get('/marital-status/all', 'viewMarital')->name('view.marital');
 
 
 

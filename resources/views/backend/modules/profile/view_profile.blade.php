@@ -160,7 +160,7 @@
                                 <!--end::Name-->
                                 <!--begin::Info-->
                                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    <span class="d-flex align-items-center text-gray-400 me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -168,8 +168,9 @@
                                             <path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Web Developer</a>
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    <!--end::Svg Icon-->{{$adminData->job_title}}</span>
+                                    @if(isset($adminData->presentDivision['division_name']))
+                                    <span class="d-flex align-items-center text-gray-400 me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -177,8 +178,9 @@
                                             <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Dhaka</a>
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                    <!--end::Svg Icon-->{{$adminData->presentDivision['division_name']}}</span>
+                                    @endif
+                                    <span class="d-flex align-items-center text-gray-400 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -186,10 +188,12 @@
                                             <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->{{$adminData->email}}</a>
+                                    <!--end::Svg Icon-->{{$adminData->email}}</span>
                                 </div>
                                 <!--end::Info-->
-                                <a href="#" class="btn btn-sm btn-light-success fw-bolder fs-6" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: +8801818987778</a>
+                                @if ($adminData->phone)
+                                <h4 class="badge badge-light-success fw-bolder fs-4" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: {{$adminData->phone}}</h4>
+                                @endif
                             </div>
                             <!--end::User-->
                             <!--begin::Actions-->
@@ -306,12 +310,12 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="../../demo1/dist/account/overview.html">Overview</a>
+                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.profile')}}">Overview</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="../../demo1/dist/account/settings.html">Settings</a>
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.profile', $adminData->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -329,9 +333,6 @@
                     <h3 class="fw-bolder m-0">Profile Details</h3>
                 </div>
                 <!--end::Card title-->
-                <!--begin::Action-->
-                <a href="{{route('admin.edit.profile', $adminData->id)}}" class="btn btn-primary align-self-center">Edit Profile</a>
-                <!--end::Action-->
             </div>
             <!--begin::Card header-->
             <!--begin::Card body-->
@@ -343,32 +344,20 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Max Smith</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{$adminData->name}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Row-->
                 <!--begin::Input group-->
-                <div class="row mb-7">
+                  <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">Keenthemes</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Contact Phone
+                    <label class="col-lg-4 fw-bold text-muted">Contact Number
                     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        <span class="fw-bolder fs-6 text-gray-800 me-2">044 3276 454 935</span>
+                        <span class="fw-bolder fs-6 text-gray-800 me-2">{{$adminData->phone}}</span>
                         <span class="badge badge-success">Verified</span>
                     </div>
                     <!--end::Col-->
@@ -377,11 +366,35 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company Site</label>
+                    <label class="col-lg-4 fw-bold text-muted">Email</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">keenthemes.com</a>
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->email}}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                 <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Blood Group</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->blood_group}}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                 <!--begin::Input group-->
+                 <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Gender</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->blood_group}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -389,12 +402,11 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Country
-                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Country of origination"></i></label>
+                    <label class="col-lg-4 fw-bold text-muted">Marital Status</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Germany</span>
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->marital_name}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -402,25 +414,13 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Communication</label>
+                    <label class="col-lg-4 fw-bold text-muted">Religion</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">Email, Phone</span>
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->religion}}</span>
                     </div>
                     <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-10">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Allow Changes</label>
-                    <!--begin::Label-->
-                    <!--begin::Label-->
-                    <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800">Yes</span>
-                    </div>
-                    <!--begin::Label-->
                 </div>
                 <!--end::Input group-->
             </div>
@@ -450,7 +450,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800"> Lead Web Developer</span>
+                        <span class="fw-bolder fs-6 text-gray-800"> {{$adminData->job_title}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -462,7 +462,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Astute Horse</span>
+                        <span class="fw-bolder text-gray-800 fs-6">{{$adminData->company_name}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -474,7 +474,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">Technology</span>
+                        <span class="fw-bolder text-gray-800 fs-6">{{$adminData->job_industry}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -486,7 +486,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">House: 121, Road: 08, Gulshan - 1, Dhaka- 1212</span>
+                        <span class="fw-bolder text-gray-800 fs-6">{{$adminData->company_location}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -505,7 +505,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8">
-                                <span class="fw-bolder fs-6 text-gray-800">Southeast University<span>
+                                <span class="fw-bolder fs-6 text-gray-800">{{$adminData->university_name}}<span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -517,7 +517,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Cambrian College</span>
+                                <span class="fw-bolder text-gray-800 fs-6">{{$adminData->college_name}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -529,7 +529,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">Nalua Based Khan High School</span>
+                                <span class="fw-bolder text-gray-800 fs-6">{{$adminData->school_name}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
