@@ -4,125 +4,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--start::Toolbar-->
     <div class="toolbar" id="kt_toolbar">
         <!--begin::Container-->
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Profile
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Edit Profile
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                 <!--end::Separator-->
                 <!--begin::Description-->
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">#DHK-TAN-45670</small>
+                <small class="text-muted fs-7 fw-bold my-1 ms-1"># {{$single_user->id}}</small>
                 <!--end::Description--></h1>
                 <!--end::Title-->
             </div>
             <!--end::Page title-->
-            <!--begin::Actions-->
-            <div class="d-flex align-items-center py-1">
-                <!--begin::Wrapper-->
-                <div class="me-4">
-                    <!--begin::Menu-->
-                    <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->Filter</a>
-                    <!--begin::Menu 1-->
-                    <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61484bf44d957">
-                        <!--begin::Header-->
-                        <div class="px-7 py-5">
-                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Menu separator-->
-                        <div class="separator border-gray-200"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Form-->
-                        <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Status:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61484bf44d957" data-allow-clear="true">
-                                        <option></option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Pending</option>
-                                        <option value="2">In Process</option>
-                                        <option value="2">Rejected</option>
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Member Type:</label>
-                                <!--end::Label-->
-                                <!--begin::Options-->
-                                <div class="d-flex">
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                        <span class="form-check-label">Author</span>
-                                    </label>
-                                    <!--end::Options-->
-                                    <!--begin::Options-->
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                        <span class="form-check-label">Customer</span>
-                                    </label>
-                                    <!--end::Options-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Notifications:</label>
-                                <!--end::Label-->
-                                <!--begin::Switch-->
-                                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                    <label class="form-check-label">Enabled</label>
-                                </div>
-                                <!--end::Switch-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                        </div>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Menu 1-->
-                    <!--end::Menu-->
-                </div>
-                <!--end::Wrapper-->
-                <!--begin::Button-->
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
-                <!--end::Button-->
-            </div>
-            <!--end::Actions-->
         </div>
         <!--end::Container-->
     </div>
     <!--end::Toolbar-->
-<!--begin::Post-->
-<div class="post d-flex flex-column-fluid" id="kt_post">
+    <!--begin::wrapper-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
         <!--begin::Navbar-->
@@ -162,7 +66,7 @@
                                 <!--end::Name-->
                                 <!--begin::Info-->
                                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    <span class="d-flex align-items-center text-gray-400 me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -170,8 +74,9 @@
                                             <path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Web Developer</a>
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    <!--end::Svg Icon-->{{$single_user->job_title}}</span>
+                                    @if(isset($single_user->presentDivision['division_name']))
+                                    <span class="d-flex align-items-center text-gray-400 me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -179,8 +84,9 @@
                                             <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Dhaka</a>
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                    <!--end::Svg Icon-->{{$single_user->presentDivision['division_name']}}</span>
+                                    @endif
+                                    <span class="d-flex align-items-center text-gray-400 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -188,115 +94,14 @@
                                             <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->{{$single_user->email}}</a>
+                                    <!--end::Svg Icon-->{{$single_user->email}}</span>
                                 </div>
                                 <!--end::Info-->
-                                <a href="#" class="btn btn-sm btn-light-success fw-bolder fs-6" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: +8801818987778</a>
+                                @if ($single_user->phone)
+                                <h4 class="badge badge-light-success fw-bolder fs-4" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: {{$single_user->phone}}</h4>
+                                @endif
                             </div>
                             <!--end::User-->
-                            <!--begin::Actions-->
-                            <div class="d-flex my-4">
-                                <a href="#" class="btn btn-sm btn-light me-2" id="kt_user_follow_button">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr012.svg-->
-                                    <span class="svg-icon svg-icon-3 d-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path opacity="0.3" d="M10 18C9.7 18 9.5 17.9 9.3 17.7L2.3 10.7C1.9 10.3 1.9 9.7 2.3 9.3C2.7 8.9 3.29999 8.9 3.69999 9.3L10.7 16.3C11.1 16.7 11.1 17.3 10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill="black" />
-                                            <path d="M10 18C9.7 18 9.5 17.9 9.3 17.7C8.9 17.3 8.9 16.7 9.3 16.3L20.3 5.3C20.7 4.9 21.3 4.9 21.7 5.3C22.1 5.7 22.1 6.30002 21.7 6.70002L10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--begin::Indicator-->
-                                    <span class="indicator-label">Follow</span>
-                                    <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    <!--end::Indicator-->
-                                </a>
-                                <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">Hire Me</a>
-                                <!--begin::Menu-->
-                                <div class="me-0">
-                                    <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                        <i class="bi bi-three-dots fs-3"></i>
-                                    </button>
-                                    <!--begin::Menu 3-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-                                        <!--begin::Heading-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Payments</div>
-                                        </div>
-                                        <!--end::Heading-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Create Invoice</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link flex-stack px-3">Create Payment
-                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference"></i></a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Generate Bill</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-                                            <a href="#" class="menu-link px-3">
-                                                <span class="menu-title">Subscription</span>
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <!--begin::Menu sub-->
-                                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3">Plans</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3">Billing</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3">Statements</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu separator-->
-                                                <div class="separator my-2"></div>
-                                                <!--end::Menu separator-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <div class="menu-content px-3">
-                                                        <!--begin::Switch-->
-                                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                                            <!--begin::Input-->
-                                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                            <!--end::Input-->
-                                                            <!--end::Label-->
-                                                            <span class="form-check-label text-muted fs-6">Recuring</span>
-                                                            <!--end::Label-->
-                                                        </label>
-                                                        <!--end::Switch-->
-                                                    </div>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu sub-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-1">
-                                            <a href="#" class="menu-link px-3">Settings</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu 3-->
-                                </div>
-                                <!--end::Menu-->
-                            </div>
-                            <!--end::Actions-->
                         </div>
                         <!--end::Title-->
                     </div>
@@ -322,21 +127,21 @@
             </div>
         </div>
         <!--end::Navbar-->
-        <!--begin::details View-->
+        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}">
+            @csrf
+        <!--begin::Basic Info -->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->
             <div class="card-header cursor-pointer">
                 <!--begin::Card title-->
                 <div class="card-title m-0">
-                    <h3 class="fw-bolder m-0">Profile Details</h3>
+                    <h3 class="fw-bolder m-0">Basic Info</h3>
                 </div>
                 <!--end::Card title-->
             </div>
             <!--begin::Card header-->
             <!--begin::Content-->
             <div id="kt_account_profile_details" class="collapse show">
-                <!--begin::Form-->
-                <form id="kt_account_profile_details_form" class="form">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -390,12 +195,12 @@
                                 <div class="row">
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
+                                        <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{$single_user->first_name}}" />
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="Smith" />
+                                        <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{$single_user->last_name}}" />
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -411,7 +216,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->email}}" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -426,7 +231,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="" />
+                                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="{{$single_user->phone}}" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -440,28 +245,30 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
-                                <select name="blood_group" aria-label="Select a Language" data-control="select2" data-placeholder="Select a blood..." class="form-select form-select-solid form-select-lg">
-                                    <option value="">Select a Blood Group...</option>
-                                    <option  value="id">O+</option>
-                                    <option  value="id">O-</option>
-                                    <option  value="id">AB+</option>
+                                <select name="blood_id" aria-label="Select a blood" data-control="select2" data-placeholder="Select a blood..." class="form-select form-select-solid form-select-lg">
+                                    <option value="0">Select a Blood Group...</option>
+
+                                    @foreach($bloods as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->blood_id  ? 'selected' : '' }} >{{$item->blood_group}}</option>
+                                    @endforeach
+
                                 </select>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                         <!--begin::Input group-->
-                         <div class="row mb-6">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-bold fs-6">Gender</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select name="gender_id" aria-label="Select a gender" data-control="select2" data-placeholder="Select a gender.." class="form-select form-select-solid form-select-lg">
-                                    <option value="">Select a Gender..</option>
-                                    <option  value="1">Male</option>
-                                    <option  value="2">Female</option>
+                                <select name="gender" aria-label="Select a gender" data-control="select2" data-placeholder="Select a gender.." class="form-select form-select-solid form-select-lg">
+                                    <option value="0">Select a Gender..</option>
+                                    <option  value="Male">Male</option>
+                                    <option  value="Female">Female</option>
                                 </select>
                             </div>
                             <!--end::Col-->
@@ -475,122 +282,43 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
-                                <select name="marital_status" aria-label="Select a marital status" data-control="select2" data-placeholder="Select a marital status..." class="form-select form-select-solid form-select-lg">
-                                    <option value="">Select your marital Status...</option>
-                                    <option  value="1">Unmarrid</option>
-                                    <option  value="1">Married</option>
-                                    <option  value="1">Widow</option>
-                                    <option  value="1">Separate</option>
+                                <select name="marital_id" aria-label="Select a marital status" data-control="select2" data-placeholder="Select a marital status..." class="form-select form-select-solid form-select-lg">
+                                    <option value="0">Select your marital Status...</option>
+
+                                    @foreach($maritals as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->marital_id  ? 'selected' : '' }} >{{$item->marital_name}}</option>
+                                    @endforeach
                                 </select>
                                 <!--end::Input-->
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                         <!--begin::Input group-->
-                         <div class="row mb-6">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-bold fs-6">Religion</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select name="religion_id" aria-label="Select a religion" data-control="select2" data-placeholder="Select a religion.." class="form-select form-select-solid form-select-lg">
-                                    <option value="">Select a Religion..</option>
-                                    <option  value="1">Islam</option>
-                                    <option  value="2">Hindu</option>
+                                    <option value="0">Select a Religion..</option>
+
+                                    @foreach($religions as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->religion_id  ? 'selected' : '' }} >{{$item->religion_name}}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">Currency</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row">
-                                <select name="currnecy" aria-label="Select a Timezone" data-control="select2" data-placeholder="Select a currency.." class="form-select form-select-solid form-select-lg">
-                                    <option value="">Select a currency..</option>
-                                    <option data-kt-flag="flags/united-states.svg" value="USD">
-                                    <b>USD</b>&#160;-&#160;USA dollar</option>
-                                    <option data-kt-flag="flags/united-kingdom.svg" value="GBP">
-                                    <b>GBP</b>&#160;-&#160;British pound</option>
-                                    <option data-kt-flag="flags/australia.svg" value="AUD">
-                                    <b>AUD</b>&#160;-&#160;Australian dollar</option>
-                                    <option data-kt-flag="flags/japan.svg" value="JPY">
-                                    <b>JPY</b>&#160;-&#160;Japanese yen</option>
-                                    <option data-kt-flag="flags/sweden.svg" value="SEK">
-                                    <b>SEK</b>&#160;-&#160;Swedish krona</option>
-                                    <option data-kt-flag="flags/canada.svg" value="CAD">
-                                    <b>CAD</b>&#160;-&#160;Canadian dollar</option>
-                                    <option data-kt-flag="flags/switzerland.svg" value="CHF">
-                                    <b>CHF</b>&#160;-&#160;Swiss franc</option>
-                                </select>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Communication</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row">
-                                <!--begin::Options-->
-                                <div class="d-flex align-items-center mt-3">
-                                    <!--begin::Option-->
-                                    <label class="form-check form-check-inline form-check-solid me-5">
-                                        <input class="form-check-input" name="communication[]" type="checkbox" value="1" />
-                                        <span class="fw-bold ps-2 fs-6">Email</span>
-                                    </label>
-                                    <!--end::Option-->
-                                    <!--begin::Option-->
-                                    <label class="form-check form-check-inline form-check-solid">
-                                        <input class="form-check-input" name="communication[]" type="checkbox" value="2" />
-                                        <span class="fw-bold ps-2 fs-6">Phone</span>
-                                    </label>
-                                    <!--end::Option-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="row mb-0">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">Allow Marketing</label>
-                            <!--begin::Label-->
-                            <!--begin::Label-->
-                            <div class="col-lg-8 d-flex align-items-center">
-                                <div class="form-check form-check-solid form-switch fv-row">
-                                    <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing" checked="checked" />
-                                    <label class="form-check-label" for="allowmarketing"></label>
-                                </div>
-                            </div>
-                            <!--begin::Label-->
-                        </div>
-                        <!--end::Input group-->
-                    </div>
-                    <!--end::Card body-->
-                    <!--begin::Actions-->
-                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end::Form-->
             </div>
-		    <!--end::Content-->
+            <!--end::Content-->
         </div>
-        <!--end::details View-->
-         <!--begin::details View-->
-         <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}">
-            @csrf
-         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+        <!--end::Basic Info-->
+        <!--begin::Works and Education View-->
+        <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->
             <div class="card-header cursor-pointer">
                 <!--begin::Card title-->
@@ -599,7 +327,8 @@
                 </div>
                 <!--end::Card title-->
             </div>
-            <!--begin::Card header-->
+            <!--end::Card header-->
+            <!--start::Row-->
             <div class="row">
                 <div class="col-xl-6">
                 <!--begin::Card body-->
@@ -612,11 +341,11 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="job_title" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                    <input type="text" name="job_title" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->job_title}}" />
                 </div>
                 <!--end::Col-->
                 </div>
-				<!--end::Input group-->
+                <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="row mb-6">
                 <!--begin::Label-->
@@ -624,11 +353,11 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="company_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                    <input type="text" name="company_name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->company_name}}" />
                 </div>
                 <!--end::Col-->
                 </div>
-				<!--end::Input group-->
+                <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="row mb-6">
                 <!--begin::Label-->
@@ -636,13 +365,13 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <textarea name="company_location" class="form-control form-control-solid" rows="3" placeholder=""></textarea>
+                    <textarea name="company_location" class="form-control form-control-solid" rows="3" placeholder="">{{$single_user->company_location}}</textarea>
                 </div>
                 <!--end::Col-->
                 </div>
                 <!--end::Input group-->
                 </div>
-                 <!--end::Card body-->
+                    <!--end::Card body-->
                 </div>
                 <div class="col-xl-6">
                     <!--begin::Card body-->
@@ -655,7 +384,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                            <input type="text" name="university_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                            <input type="text" name="university_name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->university_name}}" />
                         </div>
                         <!--end::Col-->
                         </div>
@@ -667,7 +396,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                            <input type="text" name="college_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                            <input type="text" name="college_name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->college_name}}" />
                         </div>
                         <!--end::Col-->
                         </div>
@@ -679,7 +408,7 @@
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
-                            <input type="text" name="school_name" class="form-control form-control-lg form-control-solid" placeholder="" value="" />
+                            <input type="text" name="school_name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->school_name}}" />
                         </div>
                         <!--end::Col-->
                         </div>
@@ -688,10 +417,11 @@
                     </div>
                     <!--end::Card body-->
                 </div>
-            </div> <!-- end row -->
+            </div>
+            <!--end::Row-->
         </div>
-        <!--end::details View-->
-        <!--begin::details View-->
+        <!--end::Works and Education -->
+        <!--begin::Address Info-->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->
             <div class="card-header cursor-pointer">
@@ -705,7 +435,6 @@
             <div class="row">
                 <div class="col-xl-6">
                     <!--begin::Form-->
-
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -716,7 +445,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select id="division_id" name="present_division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
-
+                                    <option value="0">Select a Division...</option>
                                     @foreach($divisions as $item)
                                     <option value="{{$item->id}}" {{ $item->id == $single_user->present_division_id  ? 'selected' : '' }} >{{$item->division_name}}</option>
                                     @endforeach
@@ -726,8 +455,8 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                         <!--begin::District Input group-->
-                         <div class="row mb-6">
+                            <!--begin::District Input group-->
+                            <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">
                                 <span class="required">District</span>
@@ -737,14 +466,14 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select id="district_id" name="present_district_id" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
-                                    <option value="">Select a District...</option>
+                                    <option value="0">Select a District...</option>
 
                                 </select>
                             </div>
                             <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                             <!--begin::District Input group-->
+                                <!--begin::District Input group-->
                             <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">
@@ -755,7 +484,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select id="subdistrict_id" name="present_subdistrict_id" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
-                                    <option value="">Select a SubDistrict...</option>
+                                    <option value="0">Select a SubDistrict...</option>
 
                                 </select>
                             </div>
@@ -763,8 +492,8 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                             <!--begin::Label-->
-                             <label class="col-lg-12 col-form-label fw-bold fs-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-12 col-form-label fw-bold fs-6">
                                 <span class="required">Present Address Line:</span>
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Select Distric Name"></i>
                             </label>
@@ -781,8 +510,6 @@
                             </div>
                             <!--end::Actions-->
                         </div>
-                    </form>
-                    <!--end::Form-->
                 </div>
                 <div class="col-xl-6">
                     <!--begin::Card body-->
@@ -794,13 +521,13 @@
                 </div>
             </div> <!-- end row -->
         </div>
-        <!--end::details View-->
+        <!--end::Address Info -->
+    </form>
     </div>
     <!--end::Container-->
+    </div>
+    <!--end::wrapper-->
 </div>
-<!--end::Post-->
-</div>
-
 
 <script type="text/javascript">
 
@@ -844,7 +571,5 @@
     });
 
 </script>
-
-
 @endsection
 

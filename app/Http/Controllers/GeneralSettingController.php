@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
-use App\Models\Division;
 use App\Models\BloodGroup;
+use App\Models\Gender;
 use App\Models\MaritalStatus;
+use App\Models\Religion;
 use App\Models\User;
 
 
@@ -80,6 +81,71 @@ public function deleteBloodGroup($id){
 } // End Method
 
 
+
+/*********************************************
+ * Gender
+ *********************************************/
+
+
+// view all
+public function viewGender(){
+
+    $genders = Gender::all();
+
+    return view('backend.modules.gender.view_all_genders', compact('genders'));
+
+}//end method
+
+ //insert method
+public function insertGender(Request $request){
+
+    Gender::insert([
+        'gender_name' => $request->gender_name,
+        'created_at' => Carbon::now(),
+
+    ]);
+
+return redirect()->route('view.gender');
+
+}//end method
+
+// get blood ajax
+public function editGender(Request $request){
+
+$gender_id = $request->id;
+
+$genders = Gender::where('id', $gender_id)->get();
+
+return response()->json($genders);
+}
+
+
+// update method
+public function updateGender(Request $request){
+
+$gender_id = $request->id;
+
+Gender::findOrFail($gender_id)->update([
+    'gender_name' => $request->gender_name,
+    'updated_at' => Carbon::now(),
+
+]);
+
+return redirect()->route('view.gender');
+
+}// end method
+
+
+// delete method for single item
+public function deleteGender($id){
+
+    Gender::findOrFail($id)->delete();
+
+return redirect()->back();
+
+} // End Method
+
+
 /*********************************************
  * Marital Status
  *********************************************/
@@ -138,6 +204,71 @@ return redirect()->route('view.bloods');
 public function deleteMarital($id){
 
 MaritalStatus::findOrFail($id)->delete();
+
+return redirect()->back();
+
+} // End Method
+
+
+
+/*********************************************
+ * Religion
+ *********************************************/
+
+
+// view all
+public function viewReligion(){
+
+    $religions = Religion::all();
+
+    return view('backend.modules.religion.view_all_religions',compact('religions'));
+
+}//end method
+
+ //insert method
+public function insertReligion(Request $request){
+
+    Religion::insert([
+        'religion_name' => $request->religion_name,
+        'created_at' => Carbon::now(),
+
+    ]);
+
+return redirect()->route('view.religion');
+
+}//end method
+
+// get blood ajax
+public function editReligion(Request $request){
+
+$religion_id = $request->id;
+
+$religions = Religion::where('id', $religion_id)->get();
+
+return response()->json($religions);
+}
+
+
+// update method
+public function updateReligion(Request $request){
+
+$religion_id = $request->id;
+
+Religion::findOrFail($religion_id)->update([
+    'religion_name' => $request->religion_name,
+    'updated_at' => Carbon::now(),
+
+]);
+
+return redirect()->route('view.religion');
+
+}// end method
+
+
+// delete method for single item
+public function deleteReligion($id){
+
+    Religion::findOrFail($id)->delete();
 
 return redirect()->back();
 

@@ -618,6 +618,16 @@
                             </div>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
                                 <div class="menu-item">
+                                    <a class="menu-link" href="{{route('view.gender')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Gender</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
                                     <a class="menu-link" href="{{route('view.marital')}}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
@@ -626,6 +636,17 @@
                                     </a>
                                 </div>
                             </div>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{route('view.religion')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Religion</span>
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -86,7 +86,23 @@ class User extends Authenticatable
     }
 
 
+    public function blood(){
 
+        return $this->belongsTo(BloodGroup::class,'blood_id','id');
+
+    }
+
+    public function marital(){
+
+        return $this->belongsTo(MaritalStatus::class,'marital_id','id');
+
+    }
+
+    public function religion(){
+
+        return $this->belongsTo(Religion::class,'religion_id','id');
+
+    }
 
 
 

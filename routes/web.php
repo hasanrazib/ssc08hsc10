@@ -99,6 +99,18 @@ Route::controller(GeneralSettingController::class)->group(function () {
     Route::get('/marital-status/delete/{id}','deleteMarital')->name('delete.marital');
     Route::get('/marital-status/all', 'viewMarital')->name('view.marital');
 
+    Route::post('/religion/insert', 'insertReligion')->name('insert.religion');
+    Route::get('/get-religion/edit/{id}', 'editReligion')->name('edit.religion'); // ajax
+    Route::post('/religion/update/','updateReligion')->name('update.religion');
+    Route::get('/religion/delete/{id}','deleteReligion')->name('delete.religion');
+    Route::get('/religion/all', 'viewReligion')->name('view.religion');
+
+    Route::post('/gender/insert', 'insertGender')->name('insert.gender');
+    Route::get('/get-gender/edit/{id}', 'editGender')->name('edit.gender'); // ajax
+    Route::post('/gender/update/','updateGender')->name('update.gender');
+    Route::get('/gender/delete/{id}','deleteGender')->name('delete.gender');
+    Route::get('/gender/all', 'viewGender')->name('view.gender');
+
 
 
 });
