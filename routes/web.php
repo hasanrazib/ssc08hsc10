@@ -31,6 +31,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/edit/{id}', 'editProfile')->name('admin.edit.profile');
     Route::post('/admin/update/', 'updateProfile')->name('admin.update.profile');
 
+    Route::get('/admin/users/{id}', 'viewSingleUser')->name('admin.single.user');
+    Route::get('/admin/user/edit/{id}', 'editSingleUser')->name('admin.user.edit');
+    Route::get('/admin/users/', 'viewAllUser')->name('admin.user.list');
+
 
 });
 
@@ -111,9 +115,20 @@ Route::controller(GeneralSettingController::class)->group(function () {
     Route::get('/gender/delete/{id}','deleteGender')->name('delete.gender');
     Route::get('/gender/all', 'viewGender')->name('view.gender');
 
+    Route::post('/job-industry/insert', 'insertJobIndustry')->name('insert.jobindustry');
+    Route::get('/get-job-industry/edit/{id}', 'editJobIndustry')->name('edit.jobindustry'); // ajax
+    Route::post('/job-industry/update/','updateJobIndustry')->name('update.jobindustry');
+    Route::get('/job-industry/delete/{id}','deleteJobIndustry')->name('delete.jobindustry');
+    Route::get('/job-industry/all', 'viewJobIndustry')->name('view.jobindustry');
+
 
 
 });
+
+Route::get('/phpinfo', function() {
+    return phpinfo();
+});
+
 
 Route::get('/dashboard', function () {
     return view('backend.dashboard');

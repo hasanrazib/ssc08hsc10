@@ -491,7 +491,7 @@
                             </span>
                             <div class="menu-sub menu-sub-accordion">
                                 <div class="menu-item">
-                                    <a class="menu-link" href="../../demo1/dist/apps/user-management/users/list.html">
+                                    <a class="menu-link" href="{{route('admin.user.list')}}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -647,6 +647,16 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <div  class="menu-item">
+                            <a class="menu-link" href="{{route('view.jobindustry')}}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Job Industry</span>
+                            </a>
                         </div>
                     </div>
                 </div>

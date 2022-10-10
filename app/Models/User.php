@@ -105,6 +105,18 @@ class User extends Authenticatable
     }
 
 
+    public function gender(){
+
+        return $this->belongsTo(Gender::class,'gender_id','id');
+
+    }
+
+
+    public function jobIndustry(){
+
+        return $this->belongsTo(JobIndustry::class,'job_industry_id','id');
+
+    }
 
 
 

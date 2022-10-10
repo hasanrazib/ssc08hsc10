@@ -10,6 +10,7 @@ use App\Models\BloodGroup;
 use App\Models\Gender;
 use App\Models\MaritalStatus;
 use App\Models\Religion;
+use App\Models\JobIndustry;
 use App\Models\User;
 
 
@@ -278,5 +279,67 @@ return redirect()->back();
 
 
 
+/*********************************************
+ * Job Industry
+ *********************************************/
+
+
+// view all
+public function viewJobIndustry(){
+
+    $jobindustries = JobIndustry::all();
+
+    return view('backend.modules.jobindustry.view_all_jobindustry',compact('jobindustries'));
+
+}//end method
+
+ //insert method
+public function insertJobIndustry(Request $request){
+
+    JobIndustry::insert([
+        'jobindustry_name' => $request->jobindustry_name,
+        'created_at' => Carbon::now(),
+
+    ]);
+
+return redirect()->route('view.jobindustry');
+
+}//end method
+
+// get blood ajax
+public function editJobIndustry(Request $request){
+
+$jobindustry_id = $request->id;
+
+$jobindustries = JobIndustry::where('id', $jobindustry_id)->get();
+
+return response()->json($jobindustries);
+}
+
+
+// update method
+public function updateJobIndustry(Request $request){
+
+$jobindustry_id = $request->id;
+
+JobIndustry::findOrFail($jobindustry_id)->update([
+    'jobindustry_name' => $request->jobindustry_name,
+    'updated_at' => Carbon::now(),
+
+]);
+
+return redirect()->route('view.jobindustry');
+
+}// end method
+
+
+// delete method for single item
+public function deleteJobIndustry($id){
+
+    JobIndustry::findOrFail($id)->delete();
+
+return redirect()->back();
+
+} // End Method
 
 }

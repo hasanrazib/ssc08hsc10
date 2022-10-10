@@ -37,7 +37,7 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{asset('backend/assets/media/avatars/150-26.jpg')}}" alt="image" />
+                            <img src="{{ (!empty($single_user->profile_image))? url($single_user->profile_image):url('upload/no_image.jpg') }}" alt="image" />
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
@@ -61,7 +61,9 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    <span class="fw-bolder ms-2 fs-8 py-1 px-3 badge badge-light-danger">Blood Group: O+</span>
+                                    @if(isset($single_user->blood['blood_group']))
+                                    <span class="fw-bolder ms-2 fs-8 py-1 px-3 badge badge-light-danger">Blood Group: {{$single_user->blood['blood_group']}}  </span>
+                                    @endif
                                 </div>
                                 <!--end::Name-->
                                 <!--begin::Info-->
@@ -127,7 +129,7 @@
             </div>
         </div>
         <!--end::Navbar-->
-        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}">
+        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}" enctype="multipart/form-data">
             @csrf
         <!--begin::Basic Info -->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -154,13 +156,13 @@
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                                     <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/150-26.jpg)"></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ (!empty($single_user->profile_image))? url($single_user->profile_image):url('upload/no_image.jpg') }})"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="file" name="profile_image" accept=".png, .jpg, .jpeg" />
                                         <input type="hidden" name="avatar_remove" />
                                         <!--end::Inputs-->
                                     </label>
@@ -189,22 +191,9 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
                             <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8">
-                                <!--begin::Row-->
-                                <div class="row">
-                                    <!--begin::Col-->
-                                    <div class="col-lg-6 fv-row">
-                                        <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{$single_user->first_name}}" />
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-lg-6 fv-row">
-                                        <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{$single_user->last_name}}" />
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Row-->
+                             <!--begin::Col-->
+                             <div class="col-lg-8 fv-row">
+                                <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->name}}" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -265,10 +254,11 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select name="gender" aria-label="Select a gender" data-control="select2" data-placeholder="Select a gender.." class="form-select form-select-solid form-select-lg">
+                                <select name="gender_id" aria-label="Select a gender" data-control="select2" data-placeholder="Select a gender.." class="form-select form-select-solid form-select-lg">
                                     <option value="0">Select a Gender..</option>
-                                    <option  value="Male">Male</option>
-                                    <option  value="Female">Female</option>
+                                    @foreach($genders as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->gender_id  ? 'selected' : '' }} >{{$item->gender_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!--end::Col-->
@@ -360,6 +350,26 @@
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label required fw-bold fs-6">Job Industry</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <!--begin::Input-->
+                        <select name="job_industry_id" aria-label="Select a marital status" data-control="select2" data-placeholder="Select a job industry..." class="form-select form-select-solid form-select-lg">
+                            <option value="0">Select your Job Industry ...</option>
+
+                            @foreach($jobindustries as $item)
+                            <option value="{{$item->id}}" {{ $item->id == $single_user->job_industry_id  ? 'selected' : '' }} >{{$item->jobindustry_name}}</option>
+                            @endforeach
+                        </select>
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-bold fs-6">Location</label>
                 <!--end::Label-->
@@ -437,6 +447,7 @@
                     <!--begin::Form-->
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
+                            <h3 class="card-title mb-7">Present</h3>
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
@@ -503,12 +514,6 @@
                                 <textarea name="present_address_line" class="form-control form-control-solid" rows="3" placeholder="Ex. Village/Street/Road...">{{$single_user->present_address_line}}</textarea>
                             </div>
                             <!--end::Col-->
-                            <!--begin::Actions-->
-                            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
-                            </div>
-                            <!--end::Actions-->
                         </div>
                 </div>
                 <div class="col-xl-6">
@@ -519,6 +524,12 @@
                     </div>
                     <!--end::Card body-->
                 </div>
+                  <!--begin::Actions-->
+                  <div class="card-footer d-flex justify-content-end py-6 px-9">
+                    <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                </div>
+                <!--end::Actions-->
             </div> <!-- end row -->
         </div>
         <!--end::Address Info -->

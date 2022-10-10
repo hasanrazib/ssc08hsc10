@@ -10,7 +10,11 @@ use App\Models\Division;
 use App\Models\BloodGroup;
 use App\Models\MaritalStatus;
 use App\Models\Religion;
+use App\Models\Gender;
+use App\Models\JobIndustry;
 use App\Models\User;
+use Image;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
@@ -50,26 +54,36 @@ class AdminController extends Controller
         $bloods = BloodGroup::latest()->get();
         $maritals = MaritalStatus::latest()->get();
         $religions = Religion::latest()->get();
+        $genders = Gender::latest()->get();
+        $jobindustries = JobIndustry::latest()->get();
 
-        return view('backend.modules.profile.edit_profile',compact('single_user','divisions','bloods','maritals','religions'));
+        return view('backend.modules.profile.edit_profile',compact('single_user','divisions','bloods','maritals','religions','genders','jobindustries'));
     }
 
 
     public function updateProfile(Request $request){
         $id = Auth::user()->id;
-
         $data = User::find($id);
 
-        $data->first_name  = $request->first_name;
-        $data->last_name  = $request->last_name;
+        $data->name  = $request->name;
         $data->email  = $request->email;
         $data->phone  = $request->phone;
+
+
+        $image = $request->file('profile_image');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+
+        Image::make($image)->resize(300,300)->save('upload/admin_images/'.$name_gen);
+        $save_url = 'upload/admin_images/'.$name_gen;
+
+        $data->profile_image  = $save_url;
         $data->blood_id  = $request->blood_id;
-        $data->gender  = $request->gender;
+        $data->gender_id  = $request->gender_id;
         $data->marital_id  = $request->marital_id;
         $data->religion_id  = $request->religion_id;
         $data->job_title  = $request->job_title;
         $data->company_name  = $request->company_name;
+        $data->job_industry_id  = $request->job_industry_id;
         $data->company_location  = $request->company_location;
         $data->university_name  = $request->university_name;
         $data->college_name  = $request->college_name;
@@ -84,9 +98,15 @@ class AdminController extends Controller
 
     }// End Method
 
-    public function allUserList(){
-
-        return view('backend.modules.admin.view_all_users');
+    // all user list
+    public function viewAllUser(){
+        $users = User::latest()->get();
+        return view('backend.modules.admin.view_all_users', compact('users'));
+    }
+    // view single user
+    public function viewSingleUser($id){
+        $user = User::findOrFail($id);
+        return view('backend.modules.admin.single_user', compact('user'));
     }
 
 

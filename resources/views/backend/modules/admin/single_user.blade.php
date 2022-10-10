@@ -34,7 +34,7 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{ (!empty($adminData->profile_image))? url($adminData->profile_image):url('upload/no_image.jpg') }}" alt="image" />
+                            <img src="{{ (!empty($user->profile_image))? url($user->profile_image):url('upload/no_image.jpg') }}" alt="image" />
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{$adminData->name}}</a>
+                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{$user->name}}</a>
                                     <a href="#">
                                         <!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
                                         <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -58,8 +58,8 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                    @if(isset($adminData->blood['blood_group']))
-                                    <span class="fw-bolder ms-2 fs-8 py-1 px-3 badge badge-light-danger">Blood Group: {{$adminData->blood['blood_group']}}  </span>
+                                    @if(isset($user->blood['blood_group']))
+                                    <span class="fw-bolder ms-2 fs-8 py-1 px-3 badge badge-light-danger">Blood Group: {{$user->blood['blood_group']}}  </span>
                                     @endif
                                 </div>
                                 <!--end::Name-->
@@ -73,8 +73,8 @@
                                             <path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->{{$adminData->job_title}}</span>
-                                    @if(isset($adminData->presentDivision['division_name']))
+                                    <!--end::Svg Icon-->{{$user->job_title}}</span>
+                                    @if(isset($user->presentDivision['division_name']))
                                     <span class="d-flex align-items-center text-gray-400 me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                                     <span class="svg-icon svg-icon-4 me-1">
@@ -83,7 +83,7 @@
                                             <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->{{$adminData->presentDivision['division_name']}}</span>
+                                    <!--end::Svg Icon-->{{$user->presentDivision['division_name']}}</span>
                                     @endif
                                     <span class="d-flex align-items-center text-gray-400 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
@@ -93,11 +93,11 @@
                                             <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->{{$adminData->email}}</span>
+                                    <!--end::Svg Icon-->{{$user->email}}</span>
                                 </div>
                                 <!--end::Info-->
-                                @if ($adminData->phone)
-                                <h4 class="badge badge-light-success fw-bolder fs-4" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: {{$adminData->phone}}</h4>
+                                @if ($user->phone)
+                                <h4 class="badge badge-light-success fw-bolder fs-4" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contact: {{$user->phone}}</h4>
                                 @endif
                             </div>
                             <!--end::User-->
@@ -117,7 +117,7 @@
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.profile', $adminData->id)}}">Settings</a>
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.profile', $user->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -146,7 +146,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{$adminData->name}}</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{$user->name}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -159,7 +159,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        <span class="fw-bolder fs-6 text-gray-800 me-2">{{$adminData->phone}}</span>
+                        <span class="fw-bolder fs-6 text-gray-800 me-2">{{$user->phone}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -171,7 +171,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">{{$adminData->email}}</span>
+                        <span class="fw-bold text-gray-800 fs-6">{{$user->email}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -183,7 +183,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6"> @if(isset($adminData->blood['blood_group'])){{$adminData->blood['blood_group']}}  @endif</span>
+                        <span class="fw-bold text-gray-800 fs-6"> @if(isset($user->blood['blood_group'])){{$user->blood['blood_group']}}  @endif</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -195,7 +195,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">@if(isset($adminData->gender['gender_name'])){{$adminData->gender['gender_name']}}  @endif</span>
+                        <span class="fw-bold text-gray-800 fs-6">@if(isset($user->gender['gender_name'])){{$user->gender['gender_name']}}  @endif</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -207,7 +207,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6"> @if(isset($adminData->marital['marital_name'])){{$adminData->marital['marital_name']}}  @endif</span>
+                        <span class="fw-bold text-gray-800 fs-6"> @if(isset($user->marital['marital_name'])){{$user->marital['marital_name']}}  @endif</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -219,7 +219,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bold text-gray-800 fs-6">@if(isset($adminData->religion['religion_name'])){{$adminData->religion['religion_name']}}  @endif</span>
+                        <span class="fw-bold text-gray-800 fs-6">@if(isset($user->religion['religion_name'])){{$user->religion['religion_name']}}  @endif</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -251,7 +251,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800"> {{$adminData->job_title}}</span>
+                        <span class="fw-bolder fs-6 text-gray-800"> {{$user->job_title}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -263,7 +263,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">{{$adminData->company_name}}</span>
+                        <span class="fw-bolder text-gray-800 fs-6">{{$user->company_name}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -275,7 +275,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">@if(isset($adminData->jobIndustry['jobindustry_name'])){{$adminData->jobIndustry['jobindustry_name']}}  @endif</span>
+                        <span class="fw-bolder text-gray-800 fs-6">@if(isset($user->jobIndustry['jobindustry_name'])){{$user->jobIndustry['jobindustry_name']}}  @endif</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -287,7 +287,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">{{$adminData->company_location}}</span>
+                        <span class="fw-bolder text-gray-800 fs-6">{{$user->company_location}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -306,7 +306,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8">
-                                <span class="fw-bolder fs-6 text-gray-800">{{$adminData->university_name}}<span>
+                                <span class="fw-bolder fs-6 text-gray-800">{{$user->university_name}}<span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -318,7 +318,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">{{$adminData->college_name}}</span>
+                                <span class="fw-bolder text-gray-800 fs-6">{{$user->college_name}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -330,7 +330,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">{{$adminData->school_name}}</span>
+                                <span class="fw-bolder text-gray-800 fs-6">{{$user->school_name}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -364,7 +364,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{$adminData->present_address_line}}</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{$user->present_address_line}}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -377,7 +377,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span class="fw-bolder text-gray-800 fs-6">
-                            @if(isset($adminData->presentSubDistrict['sub_district_name'])){{$adminData->presentSubDistrict['sub_district_name']}}  @endif
+                            @if(isset($user->presentSubDistrict['sub_district_name'])){{$user->presentSubDistrict['sub_district_name']}}  @endif
                         </span>
                     </div>
                     <!--end::Col-->
@@ -390,7 +390,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6"> @if(isset($adminData->presentDistrict['district_name'])){{$adminData->presentDistrict['district_name']}}  @endif
+                        <span class="fw-bolder text-gray-800 fs-6"> @if(isset($user->presentDistrict['district_name'])){{$user->presentDistrict['district_name']}}  @endif
                          </span>
                     </div>
                     <!--end::Col-->
@@ -403,7 +403,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-bolder text-gray-800 fs-6">@if(isset($adminData->presentDivision['division_name'])){{$adminData->presentDivision['division_name']}}  @endif
+                        <span class="fw-bolder text-gray-800 fs-6">@if(isset($user->presentDivision['division_name'])){{$user->presentDivision['division_name']}}  @endif
 
                         </span>
                     </div>
@@ -424,7 +424,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8">
-                                <span class="fw-bolder fs-6 text-gray-800">{{$adminData->permanent_address_line}}</span>
+                                <span class="fw-bolder fs-6 text-gray-800">{{$user->permanent_address_line}}</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -436,7 +436,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($adminData->permanentSubDistrict['sub_district_name'])){{$adminData->permanentSubDistrict['sub_district_name']}}  @endif</span>
+                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($user->permanentSubDistrict['sub_district_name'])){{$adminData->permanentSubDistrict['sub_district_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -448,7 +448,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($adminData->permanentDistrict['district_name'])){{$adminData->permanentDistrict['district_name']}}  @endif</span>
+                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($user->permanentDistrict['district_name'])){{$user->permanentDistrict['district_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -461,7 +461,7 @@
                             <!--begin::Col-->
 
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6"> @if(isset($adminData->permanentDivision['division_name'])){{$adminData->permanentDivision['division_name']}}  @endif</span>
+                                <span class="fw-bolder text-gray-800 fs-6"> @if(isset($user->permanentDivision['division_name'])){{$user->permanentDivision['division_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>

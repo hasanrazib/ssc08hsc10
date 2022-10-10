@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username')->unique()->nullable();
+            $table->string('profile_image')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -35,11 +36,11 @@ return new class extends Migration
             $table->string('university_name')->default('Add University')->nullable();
             $table->string('college_name')->default('Add College')->nullable();
             $table->string('school_name')->default('Add School')->nullable();
-            $table->text('present_address_line')->default('Update Your Present Address Line')->nullable();
+            $table->text('present_address_line')->nullable();
             $table->integer('present_subdistrict_id')->default('0');
             $table->integer('present_district_id')->default('0');
             $table->integer('present_division_id')->default('0');
-            $table->text('permanent_address_line')->default('Update Your Permanent Address Line')->nullable();
+            $table->text('permanent_address_line')->nullable();
             $table->integer('permanent_subdistrict_id')->default('0');
             $table->integer('permanent_district_id')->default('0');
             $table->integer('permanent_division_id')->default('0');
