@@ -112,12 +112,12 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.profile')}}">Overview</a>
+                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.view.single.user',$user->id)}}">Overview</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.profile', $user->id)}}">Settings</a>
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.single.user', $user->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -436,7 +436,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($user->permanentSubDistrict['sub_district_name'])){{$adminData->permanentSubDistrict['sub_district_name']}}  @endif</span>
+                                <span class="fw-bolder text-gray-800 fs-6">  @if(isset($user->permanentSubDistrict['sub_district_name'])){{$user->permanentSubDistrict['sub_district_name']}}  @endif</span>
                             </div>
                             <!--end::Col-->
                         </div>

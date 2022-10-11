@@ -142,7 +142,7 @@
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Button-->
-                <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
+                <a href="{{route('admin.add.user')}}" class="btn btn-sm btn-primary">Add New User</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -607,7 +607,7 @@
                                     <!--end::Avatar-->
                                     <!--begin::User details-->
                                     <div class="d-flex flex-column">
-                                        <a href="{{route('admin.single.user',$item->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$item->name}}</a>
+                                        <a href="{{route('admin.view.single.user',$item->id)}}" class="text-gray-800 text-hover-primary mb-1">{{$item->name}}</a>
                                         <span>{{$item->email}}</span>
                                     </div>
                                     <!--begin::User details-->
@@ -630,7 +630,7 @@
                                 <!--begin::Action=-->
                                 <td>
                                     <div class="d-flex justify-content-end flex-shrink-0">
-                                       <a href="{{route('admin.single.user', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                       <a href="{{route('admin.view.single.user', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-success svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/General/Visible.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -641,7 +641,7 @@
                                             </svg><!--end::Svg Icon--></span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        <a href="{{route('admin.edit.profile', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                        <a href="{{route('admin.edit.single.user', $item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3 svg-icon-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

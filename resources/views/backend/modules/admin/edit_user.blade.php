@@ -115,12 +115,12 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6" href="{{route('admin.profile')}}">Overview</a>
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.view.single.user',$single_user->id)}}">Overview</a>
                         </li>
                         <!--end::Nav item-->
                         <!--begin::Nav item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.edit.profile', $single_user->id)}}">Settings</a>
+                            <a class="nav-link text-active-primary me-6 active" href="{{route('admin.edit.single.user', $single_user->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -129,7 +129,7 @@
             </div>
         </div>
         <!--end::Navbar-->
-        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.profile')}}" enctype="multipart/form-data">
+        <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.single.user')}}" enctype="multipart/form-data">
             @csrf
         <!--begin::Basic Info -->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
@@ -205,7 +205,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="email"  readonly="readonly" name="email" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->email}}" />
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$single_user->email}}" readonly="readonly"/>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -554,6 +554,7 @@
                     var html = '<option value="">Select Category</option>';
                     $.each(data,function(key,v){
                         html += '<option value="'+v.id+'" > '+v.district_name+'</option>';
+
                     });
                     $('#district_id').html(html);
                 }
