@@ -517,12 +517,80 @@
                         </div>
                 </div>
                 <div class="col-xl-6">
-                    <!--begin::Card body-->
-                    <div class="card-body p-9 card-dashed">
-                        <h3 class="card-title mb-7">Permanent:</h3>
+                    <!--begin::Form-->
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                            <h3 class="card-title mb-7">Permanent</h3>
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Division</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select id="permanent_division_id" name="permanent_division_id" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Division..." class="form-select form-select-solid form-select-lg fw-bold">
+                                    <option value="0">Select a Division...</option>
+                                    @foreach($divisions as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->permanent_division_id  ? 'selected' : '' }} >{{$item->division_name}}</option>
+                                    @endforeach
 
-                    </div>
-                    <!--end::Card body-->
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                            <!--begin::District Input group-->
+                            <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                <span class="required">District</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Select Distric Name"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select id="permanent_district_id" name="permanent_district_id" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
+                                    <option value="0">Select a District...</option>
+                                    @foreach($districts as $item)
+                                    <option value="{{$item->id}}" {{ $item->id == $single_user->permanent_district_id  ? 'selected' : '' }} >{{$item->district_name}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                                <!--begin::District Input group-->
+                            <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                <span class="required">Sub District</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Select Distric Name"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <select id="permanent_subdistrict_id" name="permanent_subdistrict_id" aria-label="Select a district" data-control="select2" data-placeholder="Select a District..." class="form-select form-select-solid form-select-lg fw-bold">
+                                    <option value="0">Select a SubDistrict...</option>
+
+                                </select>
+                            </div>
+                            <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                                <!--begin::Label-->
+                                <label class="col-lg-12 col-form-label fw-bold fs-6">
+                                <span class="required">Present Address Line:</span>
+                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Select Distric Name"></i>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-12 fv-row">
+                                <textarea name="permanent_address_line" class="form-control form-control-solid" rows="3" placeholder="Ex. Village/Street/Road...">{{$single_user->permanent_address_line}}</textarea>
+                            </div>
+                            <!--end::Col-->
+                        </div>
                 </div>
                   <!--begin::Actions-->
                   <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -581,7 +649,52 @@
             })
         });
     });
+// permanent
+$(function(){
+        $(document).on('change','#permanent_division_id',function(){
 
+            var division_id = $(this).val();
+            alert(division_id)
+
+            $.ajax({
+                url:"{{ route('get-district-list') }}",
+                type: "GET",
+                data:{division_id:division_id},
+                success:function(data){
+                    var html = '<option value="">Select Category</option>';
+                    $.each(data,function(key,v){
+
+                        html += '<option value="'+v.id+'" > '+v.district_name+'</option>';
+
+                    });
+                    $('#permanent_district_id').html(html);
+                }
+            })
+
+
+
+        });
+
+    });
+
+    $(function(){
+        $(document).on('click','#permanent_district_id',function(){
+
+            var district_id = $(this).val();
+            $.ajax({
+                url:"{{ route('get-sub-district-list') }}",
+                type: "GET",
+                data:{district_id:district_id},
+                success:function(data){
+                    var html = '<option value="">Select Category</option>';
+                    $.each(data,function(key,v){
+                        html += '<option value=" '+v.id+' "> '+v.sub_district_name+'</option>';
+                    });
+                    $('#permanent_subdistrict_id').html(html);
+                }
+            })
+        });
+    });
 </script>
 @endsection
 

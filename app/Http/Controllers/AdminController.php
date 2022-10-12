@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Division;
+use App\Models\District;
 use App\Models\BloodGroup;
 use App\Models\MaritalStatus;
 use App\Models\Religion;
@@ -137,7 +138,6 @@ class AdminController extends Controller
 
 
     // insert
-
     public function insertUser(Request $request){
 
         $request->validate([
@@ -182,19 +182,22 @@ class AdminController extends Controller
         $data->save();
 
         return redirect()->route('admin.view.all.user');
-    }
+    }// end method
+
+
     // edit single user
     public function editSingleUser($id){
 
         $single_user = User::findOrFail($id);
         $divisions = Division::latest()->get();
+        $districts = District::latest()->get();
         $bloods = BloodGroup::latest()->get();
         $maritals = MaritalStatus::latest()->get();
         $religions = Religion::latest()->get();
         $genders = Gender::latest()->get();
         $jobindustries = JobIndustry::latest()->get();
 
-        return view('backend.modules.admin.edit_user',compact('single_user','divisions','bloods','maritals','religions','genders','jobindustries'));
+        return view('backend.modules.admin.edit_user',compact('single_user','divisions','districts','bloods','maritals','religions','genders','jobindustries'));
 
     }// end method
 

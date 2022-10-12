@@ -585,6 +585,8 @@ $(function(){
         $(document).on('change','#permanent_division_id',function(){
 
             var division_id = $(this).val();
+            alert(division_id)
+
             $.ajax({
                 url:"{{ route('get-district-list') }}",
                 type: "GET",
@@ -592,12 +594,16 @@ $(function(){
                 success:function(data){
                     var html = '<option value="">Select Category</option>';
                     $.each(data,function(key,v){
+
                         html += '<option value="'+v.id+'" > '+v.district_name+'</option>';
 
                     });
                     $('#permanent_district_id').html(html);
                 }
             })
+
+
+
         });
 
     });

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
@@ -21,6 +22,26 @@ use App\Http\Controllers\DefaultController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+// Property All Route
+Route::controller(PropertyController::class)->group(function () {
+    Route::get('/property/add', 'addProperty')->name('add.property');
+    Route::post('/property/insert', 'insertProperty')->name('insert.property');
+    Route::get('/property/all', 'viewAllProperty')->name('view.property');
+
+    Route::post('/property-category/insert', 'insertPropertyCategory')->name('insert.property.category');
+    Route::get('/get-property-category/edit/{id}', 'editPropertyCategory')->name('edit.property.category'); // ajax
+    Route::post('/property-category/update/','updatePropertyCategory')->name('update.property.category');
+    Route::get('/property-category/delete/{id}','deletePropertyCategory')->name('delete.property.category');
+    Route::get('/property-category/all', 'viewPropertyCategory')->name('view.property.category');
+
+
+   // Route::get('/property/edit/{id}','editProperty')->name('edit.property');
+    //Route::post('/property/update/','updateProperty')->name('update.property');
+   // Route::get('/property/delete/{id}','deleteProperty')->name('delete.property');
+
 });
 
 
