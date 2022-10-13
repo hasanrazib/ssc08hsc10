@@ -38,6 +38,7 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="{{asset('backend/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('backend/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+        <link href="{{asset('backend/assets/css/rh-custom.css')}}" rel="stylesheet" type="text/css" />
         <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 
 	</head>

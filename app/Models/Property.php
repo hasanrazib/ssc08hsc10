@@ -9,4 +9,11 @@ class Property extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+    public function propertyCategory(){
+
+        return $this->belongsTo(PropertyCategory::class,'property_category_id','id');
+
+    }
 }

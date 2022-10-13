@@ -29,6 +29,7 @@ Route::get('/', function () {
 Route::controller(PropertyController::class)->group(function () {
     Route::get('/property/add', 'addProperty')->name('add.property');
     Route::post('/property/insert', 'insertProperty')->name('insert.property');
+    Route::get('/property/item/{id}', 'viewSingleProperty')->name('view.single.property');
     Route::get('/property/all', 'viewAllProperty')->name('view.property');
 
     Route::post('/property-category/insert', 'insertPropertyCategory')->name('insert.property.category');
