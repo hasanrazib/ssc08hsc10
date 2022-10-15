@@ -27,8 +27,8 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
 
-        <div class="rh-card" style="background:url('https://dummyimage.com/820x312/dddddd/fff&text=+');background-repeat:no-repeat;background-size:cover;background-position:50% 50%">
-            <div class="property-logo">
+        <div class="rh-card" style="background:url({{ (!empty($property->property_cover))? url($property->property_cover):url('upload/847x312_cover.png') }});background-repeat:no-repeat;background-size:cover;background-position:50% 50%">
+            <div class="property-logo" style="background:url({{ (!empty($property->property_logo))? url($property->property_logo):url('upload/200x200_logo.png') }})">
 
             </div>
 
@@ -140,16 +140,14 @@
                     </div>
                     <!--begin::Card header-->
                     <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    {{$property->property_description}}
                     </div>
                 </div>
             </div>
         </div>
         <!--end::details View-->
         <div class="map-area">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.4117010569357!2d90.36510231413168!3d23.768349494009133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0a8b9b3e269%3A0xb23c66de39bdf242!2sDNET!5e0!3m2!1sen!2sbd!4v1665662637475!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="{{$property->property_map}}" width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <!--begin::Social Icon-->
@@ -157,17 +155,17 @@
             <!--begin::Body-->
             <div class="card-body py-12">
                 <!--begin::Icon-->
-                <a href="#" class="mx-4">
+                <a href="{{$property->property_facebook_page}}" class="mx-4">
                     <img src="{{asset('backend/assets/media/svg/brand-logos/facebook-4.svg')}}" class="h-30px my-2" alt="" />
                 </a>
                 <!--end::Icon-->
                 <!--begin::Icon-->
-                <a href="#" class="mx-4">
+                <a href="{{$property->property_instagram_page}}" class="mx-4">
                     <img src="{{asset('backend/assets/media/svg/brand-logos/instagram-2-1.svg')}}" class="h-30px my-2" alt="" />
                 </a>
                 <!--end::Icon-->
                 <!--begin::Icon-->
-                <a href="#" class="mx-4">
+                <a href="{{$property->property_linkedin_page}}" class="mx-4">
                     <img src="{{asset('backend/assets/media/svg/brand-logos/github.svg')}}" class="h-30px my-2" alt="" />
                 </a>
                 <!--end::Icon-->

@@ -30,6 +30,9 @@ Route::controller(PropertyController::class)->group(function () {
     Route::get('/property/add', 'addProperty')->name('add.property');
     Route::post('/property/insert', 'insertProperty')->name('insert.property');
     Route::get('/property/item/{id}', 'viewSingleProperty')->name('view.single.property');
+    Route::get('/property/edit/{id}','editProperty')->name('edit.property');
+    Route::post('/property/update/','updateProperty')->name('update.property');
+    Route::get('/property/delete/{id}','deleteProperty')->name('delete.property');
     Route::get('/property/all', 'viewAllProperty')->name('view.property');
 
     Route::post('/property-category/insert', 'insertPropertyCategory')->name('insert.property.category');
@@ -38,10 +41,6 @@ Route::controller(PropertyController::class)->group(function () {
     Route::get('/property-category/delete/{id}','deletePropertyCategory')->name('delete.property.category');
     Route::get('/property-category/all', 'viewPropertyCategory')->name('view.property.category');
 
-
-   // Route::get('/property/edit/{id}','editProperty')->name('edit.property');
-    //Route::post('/property/update/','updateProperty')->name('update.property');
-   // Route::get('/property/delete/{id}','deleteProperty')->name('delete.property');
 
 });
 

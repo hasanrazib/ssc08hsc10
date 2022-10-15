@@ -131,6 +131,7 @@
         <!--end::Navbar-->
         <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('admin.update.single.user')}}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="id" value="{{ $single_user->id }}">
         <!--begin::Basic Info -->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->

@@ -16,4 +16,10 @@ class Property extends Model
         return $this->belongsTo(PropertyCategory::class,'property_category_id','id');
 
     }
+
+    public function propertyOwner(){
+
+        return $this->belongsTo(User::class,'property_owner_id','id');
+
+    }
 }

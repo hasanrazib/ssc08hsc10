@@ -170,7 +170,7 @@
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
-                            <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search user" />
+                            <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search Property" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -615,8 +615,9 @@
                                 </td>
                                 <!--end::User=-->
                                 <!--begin::category=-->
-                                <td>
-                                    {{$item->property_category_id}}
+                                <td>@if(isset($item ['propertyCategory']['property_category_name']))
+                                    {{$item ['propertyCategory']['property_category_name']}}
+                                    @endif
                                 </td>
                                 <!--end::category=-->
                                 <!--begin::address=-->
@@ -626,7 +627,9 @@
                                 <!--end::address=-->
                                  <!--begin::address=-->
                                  <td>
-                                    {{$item->property_owner_id}}
+                                    @if(isset($item ['propertyOwner']['name']))
+                                    {{$item ['propertyOwner']['name']}}
+                                    @endif
                                 </td>
                                 <!--end::address=-->
                                 <!--begin::Action=-->
@@ -643,7 +646,7 @@
                                             </svg><!--end::Svg Icon--></span>
                                             <!--end::Svg Icon-->
                                         </a>
-                                        <a href="" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                        <a href="{{route('edit.property',$item->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                             <span class="svg-icon svg-icon-3 svg-icon-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -654,7 +657,7 @@
                                             <!--end::Svg Icon-->
                                         </a>
 
-                                        <a href="" id="delete" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                        <a href="{{route('delete.property',$item->id)}}" id="delete" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                             <span class="svg-icon svg-icon-3 svg-icon-danger">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

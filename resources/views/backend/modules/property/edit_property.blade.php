@@ -11,7 +11,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Add Property
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Edit Property
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                 <!--end::Separator-->
@@ -30,8 +30,10 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
 
-            <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('insert.property')}}" enctype="multipart/form-data">
+            <form id="kt_account_profile_details_form" class="form" method="POST" action="{{route('update.property')}}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="id" value="{{ $property->id }}">
+
                 <!--begin::Basic Info -->
                 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                     <!--begin::Content-->
@@ -48,7 +50,7 @@
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                                             <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-100px h-100px" style="background-image: url()"></div>
+                                            <div class="image-input-wrapper w-100px h-100px" style="background-image: url({{ (!empty($property->property_logo))? url($property->property_logo):url('upload/no_image.jpg') }})"></div>
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Label-->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -72,7 +74,7 @@
                                         </div>
                                         <!--end::Image input-->
                                         <!--begin::Hint-->
-                                        <div class="form-text">Allowed file types: png, jpg, jpeg. (Logo Dimension: 200px * 200px) </div>
+                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                         <!--end::Hint-->
                                     </div>
                                     <!--end::Col-->
@@ -88,7 +90,7 @@
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                                             <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-400px h-125px" style="background-image: url()"></div>
+                                            <div class="image-input-wrapper w-400px h-125px" style="background-image: url({{ (!empty($property->property_cover))? url($property->property_cover):url('upload/no_image.jpg') }});background-size:cover;background-position:50% 50%"></div>
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Label-->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -112,7 +114,7 @@
                                         </div>
                                         <!--end::Image input-->
                                         <!--begin::Hint-->
-                                        <div class="form-text">Allowed file types: png, jpg, jpeg. (Cover Image Dimension: 820px * 312px)</div>
+                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                         <!--end::Hint-->
                                     </div>
                                     <!--end::Col-->
@@ -125,7 +127,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_name" class="form-control form-control-lg form-control-solid" placeholder="" />
+                                        <input type="text" name="property_name" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$property->property_name}}"/>
                                     </div>
                                     <!--end::Col-->
 
@@ -142,7 +144,7 @@
                                         <select name="property_category_id" aria-label="Select a category" data-control="select2" data-placeholder="Select a category..." class="form-select form-select-solid form-select-lg">
                                             <option value="0">Select a category...</option>
                                             @foreach($propertycategories as $item)
-                                            <option value="{{$item->id}}">{{$item->property_category_name}}</option>
+                                            <option value="{{$item->id}}" {{$item->id == $property->property_category_id  ? 'selected' : ''}}>{{$item->property_category_name}}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Input-->
@@ -155,11 +157,12 @@
                                     <!--begin::Label-->
                                     <label class="col-lg-12 col-form-label fw-bold fs-6">
                                     <span class="required">Address:</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Address Must Be Include"></i>
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-12 fv-row">
-                                        <textarea name="property_address" class="form-control form-control-solid" rows="2" placeholder="Ex. Street/Road..."></textarea>
+                                        <textarea name="property_address" class="form-control form-control-solid" rows="2" placeholder="Ex. Street/Road...">{{$property->property_address}}</textarea>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -169,12 +172,11 @@
                                     <!--begin::Label-->
                                     <label class="col-lg-4 col-form-label fw-bold fs-6">
                                         <span class="required">Mobile</span>
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_mobile" class="form-control form-control-lg form-control-solid" placeholder="Mobile number"/>
+                                        <input type="text" name="property_mobile" class="form-control form-control-lg form-control-solid" placeholder="Mobile number" value="{{$property->property_mobile}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -188,7 +190,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number"/>
+                                        <input type="text" name="property_phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="{{$property->property_phone}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -200,7 +202,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="email" name="property_email" class="form-control form-control-lg form-control-solid" placeholder=""/>
+                                        <input type="email" name="property_email" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$property->property_email}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -212,7 +214,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_website" class="form-control form-control-lg form-control-solid" placeholder=""/>
+                                        <input type="text" name="property_website" class="form-control form-control-lg form-control-solid" placeholder="" value="{{$property->property_website}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -226,7 +228,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-12 fv-row">
-                                        <textarea name="property_description" class="form-control form-control-solid" rows="6" placeholder=""></textarea>
+                                        <textarea name="property_description" class="form-control form-control-solid" rows="6" placeholder="">{{$property->property_description}}</textarea>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -238,7 +240,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_facebook_page" class="form-control form-control-lg form-control-solid"/>
+                                        <input type="text" name="property_facebook_page" class="form-control form-control-lg form-control-solid" value="{{$property->property_facebook_page}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -250,7 +252,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_instagram_page" class="form-control form-control-lg form-control-solid"/>
+                                        <input type="text" name="property_instagram_page" class="form-control form-control-lg form-control-solid" value="{{$property->property_instagram_page}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -262,7 +264,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="property_linkedin_page" class="form-control form-control-lg form-control-solid"/>
+                                        <input type="text" name="property_linkedin_page" class="form-control form-control-lg form-control-solid" value="{{$property->property_linkedin_page}}"/>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -276,7 +278,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-12 fv-row">
-                                        <textarea name="property_map" class="form-control form-control-solid" rows="2" placeholder="Map embed link goes to here"></textarea>
+                                        <textarea name="property_map" class="form-control form-control-solid" rows="2" placeholder="Map embed link goes to here">{{$property->property_map}}</textarea>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -293,7 +295,7 @@
                                             <option value="0">Select a owner...</option>
 
                                             @foreach($owners as $item)
-                                            <option value="{{$item->id}}">ID#{{$item->id}}-{{$item->name}} - {{$item->phone}}</option>
+                                            <option value="{{$item->id}}" {{$item->id == $property->property_owner_id  ? 'selected' : ''}}>ID#{{$item->id}}-{{$item->name}} - {{$item->phone}}</option>
                                             @endforeach
 
                                         </select>
@@ -310,7 +312,7 @@
 
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Add Property</button>
+                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
                 </div>
                 <!--end::Actions-->
             </form>
