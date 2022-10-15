@@ -422,7 +422,7 @@
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">Admin Area</span>
                     </div>
                 </div>
-                 <!-- Property Management -->
+                <!-- Property Management -->
                  <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
