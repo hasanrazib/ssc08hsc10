@@ -52,13 +52,15 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/edit/{id}', 'editProfile')->name('admin.edit.profile');
     Route::post('/admin/update/', 'updateProfile')->name('admin.update.profile');
 
+    Route::get('/admin/property/add/', 'addPropertyByUser')->name('admin.add.property.by.user');
+    Route::post('/admin/property/insert', 'insertPropertyByUser')->name('insert.property.by.user');
+
     Route::get('/admin/users/add', 'addUser')->name('admin.add.user');
     Route::post('/admin/user/insert', 'insertUser')->name('insert.user');
     Route::get('/admin/users/{id}', 'viewSingleUser')->name('admin.view.single.user');
     Route::get('/admin/users/edit/{id}', 'editSingleUser')->name('admin.edit.single.user');
     Route::post('/admin/users/update/', 'updateSingleUser')->name('admin.update.single.user');
     Route::get('/admin/users/', 'viewAllUser')->name('admin.view.all.user');
-
 
 });
 

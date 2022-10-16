@@ -13,6 +13,8 @@ use App\Models\MaritalStatus;
 use App\Models\Religion;
 use App\Models\Gender;
 use App\Models\JobIndustry;
+use App\Models\Property;
+use App\Models\PropertyCategory;
 use App\Models\User;
 use Image;
 use Illuminate\Support\Carbon;
@@ -241,4 +243,107 @@ class AdminController extends Controller
     }// End Method
 
 
+
+
+
+    // add property
+
+    public function addPropertyByUser(){
+
+        $current_owner = Auth::user()->id;
+        $property = Property::where('property_owner_id', $current_owner)->first();
+
+        $propertycategories =  PropertyCategory::latest()->get();
+        $single_user =  User::latest()->get();
+        $owners =  User::latest()->get();
+
+        return view('backend.modules.profile.add_property_by_user', compact('property','propertycategories','single_user','owners'));
+
+    }
+
+
+    // insert
+    public function insertPropertyByUser(Request $request){
+        $current_owner = Auth::user()->id;
+        $property = Property::where('property_owner_id', $current_owner)->first();
+
+        if(!$property){
+            $data = new Property();
+            $data->property_name  = $request->property_name;
+            $data->property_mobile  = $request->property_mobile;
+            $data->property_phone  = $request->property_phone;
+            $data->property_email  = $request->property_email;
+            $data->property_website  = $request->property_website;
+            $data->property_address  = $request->property_address;
+            $data->property_description  = $request->property_description;
+            $data->property_owner_id  = Auth::user()->id;
+            $data->property_category_id  = $request->property_category_id;
+
+                if ($request->file('property_logo')) {
+                    $image = $request->file('property_logo');
+                    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+                    Image::make($image)->resize(200,200)->save('upload/admin_images/'.$name_gen);
+                    $save_url = 'upload/admin_images/'.$name_gen;
+                    $data->property_logo  = $save_url;
+                }
+                if ($request->file('property_cover')) {
+                    $image = $request->file('property_cover');
+                    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+                    Image::make($image)->resize(847,312)->save('upload/admin_images/'.$name_gen);
+                    $save_url = 'upload/admin_images/'.$name_gen;
+                    $data->property_cover  = $save_url;
+                }
+            $data->property_map  = $request->property_map;
+            $data->property_facebook_page  = $request->property_facebook_page;
+            $data->property_instagram_page  = $request->property_instagram_page;
+            $data->property_linkedin_page  = $request->property_linkedin_page;
+            $data->created_by  = Auth::user()->id;
+            $data->created_at  = Carbon::now();
+            $data->save();
+
+
+            return redirect()->back();
+
+        }elseif($property){
+
+            $data = new Property();
+            $data->property_name  = $request->property_name;
+            $data->property_mobile  = $request->property_mobile;
+            $data->property_phone  = $request->property_phone;
+            $data->property_email  = $request->property_email;
+            $data->property_website  = $request->property_website;
+            $data->property_address  = $request->property_address;
+            $data->property_description  = $request->property_description;
+            $data->property_owner_id  = Auth::user()->id;
+            $data->property_category_id  = $request->property_category_id;
+
+                if ($request->file('property_logo')) {
+                    $image = $request->file('property_logo');
+                    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+                    Image::make($image)->resize(200,200)->save('upload/admin_images/'.$name_gen);
+                    $save_url = 'upload/admin_images/'.$name_gen;
+                    $data->property_logo  = $save_url;
+                }
+                if ($request->file('property_cover')) {
+                    $image = $request->file('property_cover');
+                    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+                    Image::make($image)->resize(847,312)->save('upload/admin_images/'.$name_gen);
+                    $save_url = 'upload/admin_images/'.$name_gen;
+                    $data->property_cover  = $save_url;
+                }
+            $data->property_map  = $request->property_map;
+            $data->property_facebook_page  = $request->property_facebook_page;
+            $data->property_instagram_page  = $request->property_instagram_page;
+            $data->property_linkedin_page  = $request->property_linkedin_page;
+            $data->created_by  = Auth::user()->id;
+            $data->created_at  = Carbon::now();
+            $data->update();
+
+            return redirect()->back();
+        }
+
+    }
+
+
 }
+

@@ -120,6 +120,11 @@
                             <a class="nav-link text-active-primary me-6" href="{{route('admin.edit.profile', $adminData->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.add.property.by.user')}}">Add Property</a>
+                        </li>
+                        <!--end::Nav item-->
                     </ul>
                 </div>
                 <!--begin::Navs-->
