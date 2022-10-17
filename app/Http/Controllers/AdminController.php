@@ -250,14 +250,13 @@ class AdminController extends Controller
 
     public function addPropertyByUser(){
 
+        $su =  User::latest()->get();
         $current_owner = Auth::user()->id;
         $property = Property::where('property_owner_id', $current_owner)->first();
-
         $propertycategories =  PropertyCategory::latest()->get();
-        $single_user =  User::latest()->get();
         $owners =  User::latest()->get();
 
-        return view('backend.modules.profile.add_property_by_user', compact('property','propertycategories','single_user','owners'));
+        return view('backend.modules.profile.add_property_by_user', compact('su','property','propertycategories','owners'));
 
     }
 
@@ -306,7 +305,10 @@ class AdminController extends Controller
 
         }elseif($property){
 
-            $data = new Property();
+            $current_owner = Auth::user()->id;
+            $property = Property::where('property_owner_id', $current_owner)->first();
+
+            $data = Property::find($property->id);
             $data->property_name  = $request->property_name;
             $data->property_mobile  = $request->property_mobile;
             $data->property_phone  = $request->property_phone;
@@ -335,8 +337,8 @@ class AdminController extends Controller
             $data->property_facebook_page  = $request->property_facebook_page;
             $data->property_instagram_page  = $request->property_instagram_page;
             $data->property_linkedin_page  = $request->property_linkedin_page;
-            $data->created_by  = Auth::user()->id;
-            $data->created_at  = Carbon::now();
+            $data->updated_by  = Auth::user()->id;
+            $data->updated_at  = Carbon::now();
             $data->update();
 
             return redirect()->back();

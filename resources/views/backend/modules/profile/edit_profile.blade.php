@@ -123,6 +123,11 @@
                             <a class="nav-link text-active-primary me-6 active" href="{{route('admin.edit.profile', $single_user->id)}}">Settings</a>
                         </li>
                         <!--end::Nav item-->
+                         <!--begin::Nav item-->
+                         <li class="nav-item">
+                            <a class="nav-link text-active-primary me-6" href="{{route('admin.add.property.by.user')}}">Property</a>
+                        </li>
+                        <!--end::Nav item-->
                     </ul>
                 </div>
                 <!--begin::Navs-->

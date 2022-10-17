@@ -53,7 +53,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin/update/', 'updateProfile')->name('admin.update.profile');
 
     Route::get('/admin/property/add/', 'addPropertyByUser')->name('admin.add.property.by.user');
-    Route::post('/admin/property/insert', 'insertPropertyByUser')->name('insert.property.by.user');
+    Route::post('/admin/property/insert/', 'insertPropertyByUser')->name('insert.property.by.user');
 
     Route::get('/admin/users/add', 'addUser')->name('admin.add.user');
     Route::post('/admin/user/insert', 'insertUser')->name('insert.user');
