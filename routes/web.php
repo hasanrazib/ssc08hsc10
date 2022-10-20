@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyDirectoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\SubDistrictController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\DefaultController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Property Directory
+Route::controller(PropertyDirectoryController::class)->group(function () {
+
+    Route::get('/property-directory/all', 'viewPropertyDirectory')->name('view.property.directory');
+    Route::get('/get-property-directory', 'getPropertyDirectory')->name('get.directory.ajax'); // ajax
+
+
+});
 
 // Property All Route
 Route::controller(PropertyController::class)->group(function () {
