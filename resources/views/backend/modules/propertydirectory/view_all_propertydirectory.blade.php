@@ -1,5 +1,6 @@
 @extends('backend.layouts.admin_main')
 @section('main-content')
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
@@ -1216,14 +1217,12 @@
 </div>
 <script>
 
+
 $(document).ready(function() {
-
-
 
     $(document).on('click', '.category_checkbox', function () {
 
         var ids = [];
-
 
         $('.category_checkbox').each(function () {
 
@@ -1231,6 +1230,8 @@ $(document).ready(function() {
 
                 ids.push($(this).attr('id'));
 
+                alert(ids);
+                
                 $.ajax({
                 url:"/get-property-directory/",
                 type: "GET",
@@ -1260,15 +1261,22 @@ $(document).ready(function() {
                 }
             });
 
+            }
+       
         });
 
 
-    });
 
 
 
+    }); // onclick 
 
-});
+    
+
+
+}); // document ready
+
+
 
 </script>
 @endsection
