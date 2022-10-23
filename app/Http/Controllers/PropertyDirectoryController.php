@@ -24,7 +24,7 @@ class PropertyDirectoryController extends Controller
 
 
         $property_id = $request->ids;
-        $propertycategories =  Property::whereIn('property_category_id', $property_id)->get();
+        $propertycategories =  Property::with('propertyCategory')->whereIn('property_category_id', $property_id)->get();
 
         return response()->json($propertycategories);
 

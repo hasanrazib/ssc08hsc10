@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\FriendDirectoryController;
 use App\Http\Controllers\PropertyDirectoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DistrictController;
@@ -27,6 +28,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// Friend Directory
+Route::controller(FriendDirectoryController::class)->group(function () {
+
+    Route::get('/friend-directory/all', 'viewFriendAll')->name('view.all.friend');
+
+
+
+});
 // Property Directory
 Route::controller(PropertyDirectoryController::class)->group(function () {
 
