@@ -1273,13 +1273,7 @@ $(document).ready(function() {
 
 
     }); // onclick
-
-
-
-
 }); // document ready
-
-
 
 </script>
 @endsection

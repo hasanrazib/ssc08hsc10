@@ -214,7 +214,7 @@
                     <!--begin::Tab pane-->
                     <div id="kt_project_users_card_pane" class="tab-pane fade show active">
                         <!--begin::Row-->
-                        <div class="row g-6 g-xl-9" id="property_item">
+                        <div class="row g-6 g-xl-9" id="friend_item">
 
 
 
@@ -1278,65 +1278,47 @@
 <script>
 
 
-$(document).ready(function() {
-
-    $(document).on('click', '.category_checkbox', function () {
-
-        var ids = [];
-
-        $('.category_checkbox').each(function () {
-
-            if ($(this).is(":checked")) {
-
-                ids.push($(this).attr('id'));
-
-                alert(ids);
-
-                $.ajax({
-                url:"/get-property-directory/",
+function allFriend(){
+            $.ajax({
+                url:"/get-friend",
                 type: "GET",
-                data:{ids:ids},
                 dataType:'JSON',
 
                 success:function(data){
-                    console.log(data)
+
+                    var baseurl = {!! json_encode(url('/')) !!}
+
+                    console.log(data);
+
                     var html = '';
+
                  $.each(data,function(key,v){
 
                         html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
                         html += '<div class="card">';
                         html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
                         html += '<div class="symbol symbol-65px symbol-circle mb-5">';
-                        html += '<img src="'+v.property_logo+'" alt="image" />';
+                        html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
                         html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
                         html += '</div>';
-                        html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.property_name+'</a>';
-                        html += ' <div class="fw-bold text-gray-400 mb-6">'+v.property_category_id+'</div>';
+                        html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                        html += '<div class="fw-bold text-gray-400 mb-6"></div>';
                         html += '</div>';
                         html += '</div>';
                         html += '</div>';
                     });
 
-                     $('#property_item').html(html);
+                    $('#friend_item').html(html);
                 }
             });
 
-            }
-
-        });
 
 
 
 
+}
 
-    }); // onclick
-
-
-
-
-}); // document ready
-
-
+allFriend();
 
 </script>
 @endsection
