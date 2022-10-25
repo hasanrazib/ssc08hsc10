@@ -47,7 +47,7 @@
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
-                                <input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Search" />
+                                <input type="text" class="form-control form-control-solid ps-10" name="search" id="search" value="" placeholder="Search" />
                             </div>
                             <!--end:Search-->
                             <!--begin::Border-->
@@ -1319,6 +1319,40 @@ function allFriend(){
 }
 
 allFriend();
+
+
+
+
+
+$(document).on('keyup',function(e){
+    e.preventDefault();
+
+    let search_string = $('#search').val();
+
+    $.ajax({
+        url:"",
+        method: 'GET',
+        data: {search_string:search_string},
+
+        success: function(res){
+
+            $('').html(res);
+
+        }
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 @endsection

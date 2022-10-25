@@ -30,31 +30,45 @@ class FriendDirectoryController extends Controller
 
     }
 
-
     public function getAllFriend(){
 
-        $gender_id = 1;
-        $marital_id = 2;
+      //  $friends = User::query();
 
-        if($gender_id){
+        if (!empty($_GET['jobindustry'])) {
 
-            $friends =  User::where('gender_id', $gender_id)->get();
+            $slugs = explode(',',$_GET['jobindustry']);
 
+            $catIds = JobIndustry::select('id')->whereIn('category_slug_en',$slugs)->pluck('id')->toArray();
+
+            $friends = $friends->whereIn('category_id', $catIds);
+
+        }else{
+
+             $friends = User::all();
         }
 
-        if($marital_id){
 
-            $friends =  User::where('marital_id', $marital_id)->get();
+        $friends = User::get();
 
+       // $categories = Category::orderBy('category_name_en','ASC')->get();
+
+       return response()->json($friends);
+
+
+
+    } // end Method
+
+
+    // search product
+    public function searchFriend(Request $request){
+
+        $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc');
+
+        if($searched_friends->count() >= 1){
+
+            return response()->json($searched_friends);
         }
-
-        //$friends =  User::all();
-
-        return response()->json($friends);
 
     }
-
-
-
 
 }
