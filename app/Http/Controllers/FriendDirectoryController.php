@@ -60,7 +60,7 @@ class FriendDirectoryController extends Controller
 
 
     // search product
-    public function searchFriend(Request $request){
+   /* public function searchFriend(Request $request){
 
         $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc');
 
@@ -69,6 +69,6 @@ class FriendDirectoryController extends Controller
             return response()->json($searched_friends);
         }
 
-    }
+    } */
 
 }
