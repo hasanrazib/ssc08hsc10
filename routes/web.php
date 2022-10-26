@@ -38,6 +38,7 @@ Route::controller(FriendDirectoryController::class)->group(function () {
 
 
 });
+
 // Property Directory
 Route::controller(PropertyDirectoryController::class)->group(function () {
 

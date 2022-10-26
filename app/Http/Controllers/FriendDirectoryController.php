@@ -60,15 +60,13 @@ class FriendDirectoryController extends Controller
 
 
     // search product
-   /* public function searchFriend(Request $request){
+    public function searchFriend(Request $request){
 
-        $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc');
+        $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc')->get();
 
-        if($searched_friends->count() >= 1){
+        return response()->json($searched_friends);
 
-            return response()->json($searched_friends);
-        }
 
-    } */
+    }
 
 }
