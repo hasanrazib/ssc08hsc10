@@ -48,7 +48,7 @@ class FriendDirectoryController extends Controller
         }
 
 
-        $friends = User::get();
+        $friends = User::with('jobIndustry')->get();
 
        // $categories = Category::orderBy('category_name_en','ASC')->get();
 
@@ -61,12 +61,26 @@ class FriendDirectoryController extends Controller
 
     // search product
     public function searchFriend(Request $request){
+        $search_string = $request->search_string;
+        // $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc')->orWhere('jobindustry_name','like','%'.$request->search_string.'%')->get();
+        $searched_friends = User::where('name','like','%'.$search_string.'%')->whereHas('jobIndustry', function ($query) use ($search_string){
+            $query->orWhere('jobindustry_name', 'like', '%'.$search_string.'%');
+        })->get();
 
-        $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc')->get();
 
         return response()->json($searched_friends);
 
 
+    }
+
+
+    public function filterFriend(Request $request){
+
+        $property_id = [$request->job_industry];
+
+        $searched_friends =  JobIndustry::whereIn('job_category', [2])->get();
+
+         return response()->json($searched_friends);
     }
 
 }
