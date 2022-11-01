@@ -90,7 +90,7 @@
                                 @foreach($genders as $item)
                                 <!--begin::Checkbox-->
                                 <div class="form-check form-check-custom form-check-solid mb-5">
-                                    <input class="form-check-input category_checkbox" type="checkbox" id="{{$item->id}}"/>
+                                    <input class="form-check-input gender checkbox_click" type="checkbox" id="{{$item->id}}"/>
                                     <label class="form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" for="kt_search_category_1">{{$item->gender_name}}</label>
                                     <span class="text-gray-400 fw-bolder"></span>
                                 </div>
@@ -105,7 +105,7 @@
                                 @foreach($religions as $item)
                                 <!--begin::Checkbox-->
                                 <div class="form-check form-check-custom form-check-solid mb-5">
-                                    <input class="form-check-input category_checkbox" type="checkbox" id="{{$item->id}}"/>
+                                    <input class="form-check-input religion checkbox_click" type="checkbox" id="{{$item->id}}"/>
                                     <label class="form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" for="kt_search_category_1">{{$item->religion_name}}</label>
                                     <span class="text-gray-400 fw-bolder"></span>
                                 </div>
@@ -120,7 +120,7 @@
                                 @foreach($divisions as $item)
                                 <!--begin::Checkbox-->
                                 <div class="form-check form-check-custom form-check-solid mb-5">
-                                    <input class="form-check-input category_checkbox" type="checkbox" id="{{$item->id}}"/>
+                                    <input class="form-check-input division checkbox_click" type="checkbox" id="{{$item->id}}"/>
                                     <label class="form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" for="kt_search_category_1">{{$item->division_name}}</label>
                                     <span class="text-gray-400 fw-bolder"></span>
                                 </div>
@@ -128,12 +128,6 @@
                                @endforeach
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Action-->
-                            <div class="d-flex align-items-center justify-content-end">
-                                <a href="#" class="btn btn-active-light-primary btn-color-gray-400 me-3">Discard</a>
-                                <a href="#" class="btn btn-primary">Search</a>
-                            </div>
-                            <!--end::Action-->
                         </div>
                         <!--end::Body-->
                     </div>
@@ -217,6 +211,7 @@
 
 
 function allFriend(){
+
             $.ajax({
                 url:"/get-friend",
                 type: "GET",
@@ -226,11 +221,10 @@ function allFriend(){
 
                     var baseurl = {!! json_encode(url('/')) !!}
 
-                    console.log(data);
-
                     var html = '';
 
                  $.each(data,function(key,v){
+
 
                         html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
                         html += '<div class="card">';
@@ -240,13 +234,15 @@ function allFriend(){
                         html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
                         html += '</div>';
                         html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                        html += '<div class="fw-bold text-gray-400 mb-6"></div>';
+                        html += '<div class="fw-bold text-gray-600 mb-6">'+v['job_industry']['jobindustry_name']+'</div>';
                         html += '</div>';
                         html += '</div>';
                         html += '</div>';
+
+
                     });
 
-                    $('#friend_itemd').html(html);
+                    $('#friend_item').html(html);
                 }
             });
 
@@ -290,7 +286,7 @@ $(document).on('keyup',function(e){
                 html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
                 html += '</div>';
                 html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                html += '<div class="fw-bold text-gray-400 mb-6"></div>';
+                html += '<div class="fw-bold text-gray-600 mb-6">'+v['job_industry']['jobindustry_name']+'</div>';
                 html += '</div>';
                 html += '</div>';
                 html += '</div>';
@@ -332,74 +328,50 @@ $(document).ready(function() {
 
 
 $(document).on('click', '.checkbox_click', function () {
-    var datas ='';
-    $('#property_item').html(datas);
 
     var job_inudstry = [];
-    var bloodgroup = [];
+    var blood_group = [];
+    var gender = [];
+    var religion = [];
+    var division = [];
 
-    $('.job_industry').each(function () {
+    $('.job_industry').each(function () {if ($(this).is(":checked")) {job_inudstry.push($(this).attr('id'));}});
+    $('.blood_group').each(function () {if ($(this).is(":checked")) {blood_group.push($(this).attr('id'));}});
+    $('.gender').each(function () {if ($(this).is(":checked")) {gender.push($(this).attr('id'));}});
+    $('.religion').each(function () {if ($(this).is(":checked")) {religion.push($(this).attr('id'));}});
+    $('.division').each(function () {if ($(this).is(":checked")) {division.push($(this).attr('id'));}});
 
-        if ($(this).is(":checked")) {
-
-            job_inudstry.push($(this).attr('id'));
-
-
-        }
-
-    });
-
-
-
-    $('.blood_group').each(function () {
-
-        if ($(this).is(":checked")) {
-
-            bloodgroup.push($(this).attr('id'));
-
-
-        }
-
-    });
-    alert(job_inudstry);
-    alert(bloodgroup);
     $.ajax({
-        url:"{{route('filter.friend')}}",
-        method: 'get',
-        data: {job_inudstry:job_inudstry},
+            url:"{{route('filter.friend')}}",
+            method: 'get',
+            data: {job_inudstry:job_inudstry,blood_group:blood_group,gender:gender,religion:religion,division:division},
 
-        success:function(data){
+            success:function(data){
 
-            var baseurl = {!! json_encode(url('/')) !!}
+                var baseurl = {!! json_encode(url('/')) !!}
 
-            console.log(data);
+                var html = '';
 
-            var html = '';
+                $.each(data,function(key,v){
 
-            $.each(data,function(key,v){
+                    html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
+                    html += '<div class="card">';
+                    html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
+                    html += '<div class="symbol symbol-65px symbol-circle mb-5">';
+                    html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
+                    html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
+                    html += '</div>';
+                    html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                    html += '<div class="fw-bold text-gray-600 mb-6">'+v.jobindustry_name+'</div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                });
 
-                html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
-                html += '<div class="card">';
-                html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
-                html += '<div class="symbol symbol-65px symbol-circle mb-5">';
-                html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
-                html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
-                html += '</div>';
-                html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                html += '<div class="fw-bold text-gray-400 mb-6"></div>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-            });
-
-            $('#friend_item').html(html);
+                $('#friend_item').html(html);
         }//success
 
     }); //ajax
-
-
-
-
 }); // onclick
 }); // document ready
 
