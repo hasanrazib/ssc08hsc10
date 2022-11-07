@@ -104,6 +104,9 @@ class AdminController extends Controller
 
     }// End Method
 
+
+
+
     // all user list
     public function viewAllUser(){
 
@@ -242,7 +245,18 @@ class AdminController extends Controller
 
     }// End Method
 
+    // delete user
+    public function deleteSingleUser($id){
 
+        $user = User::findOrFail($id);
+        $img = $user->profile_image;
+        unlink($img);
+
+        User::findOrFail($id)->delete();
+
+        return redirect()->back();
+
+     }// End Method
 
 
 

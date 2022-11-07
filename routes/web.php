@@ -85,7 +85,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/users/{id}', 'viewSingleUser')->name('admin.view.single.user');
     Route::get('/admin/users/edit/{id}', 'editSingleUser')->name('admin.edit.single.user');
     Route::post('/admin/users/update/', 'updateSingleUser')->name('admin.update.single.user');
+    Route::get('/admin/users/delete/{id}', 'deleteSingleUser')->name('admin.delete.single.user');
     Route::get('/admin/users/', 'viewAllUser')->name('admin.view.all.user');
+
 
 });
 

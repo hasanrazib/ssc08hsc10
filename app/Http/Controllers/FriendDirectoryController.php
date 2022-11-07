@@ -32,28 +32,9 @@ class FriendDirectoryController extends Controller
 
     public function getAllFriend(){
 
-      //  $friends = User::query();
+        $friends = DB::table('users')->join('job_industries','job_industries.id','users.job_industry_id')
+        ->get();
 
-        if (!empty($_GET['jobindustry'])) {
-
-            $slugs = explode(',',$_GET['jobindustry']);
-
-            $catIds = JobIndustry::select('id')->whereIn('category_slug_en',$slugs)->pluck('id')->toArray();
-
-            $friends = $friends->whereIn('category_id', $catIds);
-
-        }else{
-
-             $friends = User::all();
-        }
-
-
-
-
-        $friends = User::with('jobIndustry','blood')->get();
-
-
-       // $categories = Category::orderBy('category_name_en','ASC')->get();
 
        return response()->json($friends);
 
@@ -87,32 +68,32 @@ class FriendDirectoryController extends Controller
         if($request->job_inudstry){
 
             $job_industry = $request->job_inudstry;
-            $friends_filter = $friends_filter->orWhereIn('users.job_industry_id', $job_industry);
+            $friends_filter = $friends_filter->WhereIn('users.job_industry_id', $job_industry);
 
         }
 
         if($request->blood_group){
 
             $blood_group = $request->blood_group;
-            $friends_filter = $friends_filter->orWhereIn('users.blood_id', $blood_group);
+            $friends_filter = $friends_filter->WhereIn('users.blood_id', $blood_group);
         }
 
         if($request->gender){
 
             $gender = $request->gender;
-            $friends_filter = $friends_filter->orWhereIn('users.gender_id', $gender);
+            $friends_filter = $friends_filter->WhereIn('users.gender_id', $gender);
         }
 
         if($request->religion){
 
             $religion = $request->religion;
-            $friends_filter = $friends_filter->orWhereIn('users.religion_id', $religion);
+            $friends_filter = $friends_filter->WhereIn('users.religion_id', $religion);
         }
 
         if($request->division){
 
             $division = $request->division;
-            $friends_filter = $friends_filter->orWhereIn('users.present_division_id', $division);
+            $friends_filter = $friends_filter->WhereIn('users.present_division_id', $division);
         }
 
 

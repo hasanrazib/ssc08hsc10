@@ -220,24 +220,24 @@ function allFriend(){
                 success:function(data){
 
                     var baseurl = {!! json_encode(url('/')) !!}
-
                     var html = '';
 
-                 $.each(data,function(key,v){
+                    $.each(data,function(key,v){
 
+                    var industry = v.jobindustry_name;
 
-                        html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
-                        html += '<div class="card">';
-                        html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
-                        html += '<div class="symbol symbol-65px symbol-circle mb-5">';
-                        html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
-                        html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
-                        html += '</div>';
-                        html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                        html += '<div class="fw-bold text-gray-600 mb-6">'+v['job_industry']['jobindustry_name']+'</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
+                    html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
+                    html += '<div class="card">';
+                    html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
+                    html += '<div class="symbol symbol-65px symbol-circle mb-5">';
+                    html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
+                    html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
+                    html += '</div>';
+                    html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                    if(industry) { html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>'; } else {   html += '<div class="fw-bold text-gray-600 mb-6"></div>';}
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
 
 
                     });
@@ -354,6 +354,8 @@ $(document).on('click', '.checkbox_click', function () {
 
                 $.each(data,function(key,v){
 
+                   var industry = v.jobindustry_name;
+
                     html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
                     html += '<div class="card">';
                     html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
@@ -362,7 +364,7 @@ $(document).on('click', '.checkbox_click', function () {
                     html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
                     html += '</div>';
                     html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                    html += '<div class="fw-bold text-gray-600 mb-6">'+v.jobindustry_name+'</div>';
+                    if(industry) { html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>'; } else {   html += '<div class="fw-bold text-gray-600 mb-6"></div>';}
                     html += '</div>';
                     html += '</div>';
                     html += '</div>';
