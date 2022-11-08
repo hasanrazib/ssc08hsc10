@@ -46,7 +46,7 @@ class FriendDirectoryController extends Controller
     } // end Method
 
 
-    // search product
+    // search friends
     public function searchFriend(Request $request){
 
         $search_string = $request->search_string;
@@ -61,7 +61,7 @@ class FriendDirectoryController extends Controller
 
     }
 
-
+    // filtering with count option
     public function filterFriend(Request $request){
 
 
@@ -106,7 +106,9 @@ class FriendDirectoryController extends Controller
 
         $friends_filter['filter_count'] = count($friends_filter);
 
+
         return response()->json($friends_filter);
+
     }
 
 }
