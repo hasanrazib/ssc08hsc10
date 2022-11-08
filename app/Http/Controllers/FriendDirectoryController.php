@@ -32,8 +32,11 @@ class FriendDirectoryController extends Controller
 
     public function getAllFriend(){
 
-        $friends = DB::table('users')->join('job_industries','job_industries.id','users.job_industry_id')
+        $friends['friends_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
         ->get();
+
+        $friends['count_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
+        ->get()->count();
 
 
        return response()->json($friends);
@@ -101,6 +104,7 @@ class FriendDirectoryController extends Controller
                 ->leftjoin('job_industries','job_industries.id','users.job_industry_id')
                 ->get();
 
+        $friends_filter['filter_count'] = count($friends_filter);
 
         return response()->json($friends_filter);
     }

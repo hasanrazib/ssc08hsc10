@@ -142,7 +142,7 @@
                 <div class="d-flex flex-wrap flex-stack pb-7">
                     <!--begin::Title-->
                     <div class="d-flex flex-wrap align-items-center my-1">
-                        <h3 class="fw-bolder me-5 my-1">57 Items Found
+                        <h3 class="fw-bolder me-5 my-1"><span class="counter"></span> Items Found
                         <span class="text-gray-400 fs-6">by your search result ↓</span></h3>
                     </div>
                     <!--end::Title-->
@@ -209,7 +209,7 @@
 </div>
 <script>
 
-
+// start: get all friends
 function allFriend(){
 
             $.ajax({
@@ -222,48 +222,45 @@ function allFriend(){
                     var baseurl = {!! json_encode(url('/')) !!}
                     var html = '';
                     var image_placeholder = baseurl+'/upload/no_image.jpg';
+                    var counter = data['count_all'];
 
 
+                    $.each(data['friends_all'],function(key,v){
 
-                    $.each(data,function(key,v){
+                        var industry = v.jobindustry_name;
 
-                    var industry = v.jobindustry_name;
-
-                    html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
-                    html += '<div class="card">';
-                    html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
-                    html += '<div class="symbol symbol-65px symbol-circle mb-5">';
-                    if(v.profile_image){
-                    html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
-                    }else{
-                    html += '<img src="'+image_placeholder+'" alt="image" />';
-                    }
-                    html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
-                    html += '</div>';
-                    html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
-                    if(industry) {
-                    html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>';
-                    } else {
-                    html += '<div class="fw-bold text-gray-600 mb-6"></div>';}
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
+                        html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
+                        html += '<div class="card">';
+                        html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
+                        html += '<div class="symbol symbol-65px symbol-circle mb-5">';
+                        if(v.profile_image){
+                        html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
+                        }else{
+                        html += '<img src="'+image_placeholder+'" alt="image" />';
+                        }
+                        html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
+                        html += '</div>';
+                        html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                        if(industry) {
+                        html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>';
+                        } else {
+                        html += '<div class="fw-bold text-gray-600 mb-6"></div>';}
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
 
 
                     });
 
                     $('#friend_item').html(html);
+                    $('.counter').html(counter);
                 }
             });
-
-
-
-
 
 }
 
 allFriend();
-
+// end: get all friends
 
 $(document).on('keyup',function(e){
 
@@ -361,10 +358,12 @@ $(document).on('click', '.checkbox_click', function () {
                 var baseurl = {!! json_encode(url('/')) !!}
 
                 var html = '';
-
+                var counter = data['filter_count'];
                 $.each(data,function(key,v){
 
                    var industry = v.jobindustry_name;
+
+                if(v.name){
 
                     html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
                     html += '<div class="card">';
@@ -378,9 +377,14 @@ $(document).on('click', '.checkbox_click', function () {
                     html += '</div>';
                     html += '</div>';
                     html += '</div>';
+                }
+
+
                 });
 
                 $('#friend_item').html(html);
+                $('.counter').html(counter);
+
         }//success
 
     }); //ajax
