@@ -33,6 +33,7 @@ Route::get('/', function () {
 Route::controller(FriendDirectoryController::class)->group(function () {
 
     Route::get('/friend-directory/all', 'viewFriendAll')->name('view.all.friend');
+    Route::get('/friend-directory/friend/{id}', 'singleFriend')->name('view.single.friend');
     Route::get('/get-friend', 'getAllFriend')->name('get.all.friend');
     Route::get('/get-search', 'searchFriend')->name('search.friend');
     Route::get('/get-filter-checkbox', 'filterFriend')->name('filter.friend');

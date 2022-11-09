@@ -223,7 +223,8 @@ function allFriend(){
                     var html = '';
                     var image_placeholder = baseurl+'/upload/no_image.jpg';
                     var counter = data['count_all'];
-
+                    // var pagi = data['friends_all'].links;
+                    // console.log(pagi);
 
                     $.each(data['friends_all'],function(key,v){
 
@@ -240,7 +241,7 @@ function allFriend(){
                         }
                         html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
                         html += '</div>';
-                        html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                        html += '<a href="/friend-directory/friend/'+v.id+'" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
                         if(industry) {
                         html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>';
                         } else {
@@ -250,7 +251,10 @@ function allFriend(){
                         html += '</div>';
 
 
+
                     });
+
+
 
                     $('#friend_item').html(html);
                     $('.counter').html(counter);
@@ -269,7 +273,8 @@ $(document).on('keyup',function(e){
     let search_string = $('#search').val();
 
     console.log(search_string);
-
+    var datas ='';
+        $('#property_item').html(datas);
     $.ajax({
         url:"{{route('search.friend')}}",
         method: 'GET',

@@ -25,14 +25,24 @@ class FriendDirectoryController extends Controller
         $religions = Religion::latest()->get();
         $genders = Gender::latest()->get();
         $jobindustries = JobIndustry::latest()->get();
+        $users = User::latest()->get();
+        return view('backend.modules.frienddirectory.view_all_friends', compact('jobindustries','bloods','religions','divisions','genders','users'));
 
-        return view('backend.modules.frienddirectory.view_all_friends', compact('jobindustries','bloods','religions','divisions','genders'));
+    }
 
+    //
+    public function singleFriend($id){
+
+        $friend = User::findOrFail($id);
+
+        return view('backend.modules.frienddirectory.view_single_friend', compact('friend'));
     }
 
     public function getAllFriend(){
 
-        $friends['friends_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
+        $friends['friends_all'] = DB::table('users')
+        ->select('users.*')
+        ->leftjoin('job_industries','job_industries.id','users.job_industry_id')
         ->get();
 
         $friends['count_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
