@@ -40,10 +40,8 @@ class FriendDirectoryController extends Controller
 
     public function getAllFriend(){
 
-        $friends['friends_all'] = DB::table('users')
-        ->select('users.*')
-        ->leftjoin('job_industries','job_industries.id','users.job_industry_id')
-        ->get();
+        $friends['friends_all'] = User::with('jobIndustry')->paginate(2);
+
 
         $friends['count_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
         ->get()->count();

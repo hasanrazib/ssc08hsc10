@@ -159,37 +159,11 @@
                         <!--end::Row-->
                         <!--begin::Pagination-->
                         <div class="d-flex flex-stack flex-wrap pt-10">
-                            <div class="fs-6 fw-bold text-gray-700">Showing 1 to 10 of 50 entries</div>
+                            <div class="fs-6 fw-bold text-gray-700">Showing <span id="count_from"></span> to <span id="count_to"></span> of <span id="total_count"></span> entries</div>
                             <!--begin::Pages-->
+
                             <ul class="pagination">
-                                <li class="page-item previous">
-                                    <a href="#" class="page-link">
-                                        <i class="previous"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">5</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">6</a>
-                                </li>
-                                <li class="page-item next">
-                                    <a href="#" class="page-link">
-                                        <i class="next"></i>
-                                    </a>
-                                </li>
+
                             </ul>
                             <!--end::Pages-->
                         </div>
@@ -226,9 +200,18 @@ function allFriend(){
                     // var pagi = data['friends_all'].links;
                     // console.log(pagi);
 
-                    $.each(data['friends_all'],function(key,v){
 
-                        var industry = v.jobindustry_name;
+                    console.log(data['friends_all']['links']);
+
+                    $.each(data['friends_all']['data'],function(key,v){
+                        var industry = '';
+
+                        if(typeof v['job_industry'] !=='undefined' && v['job_industry'] !==null){
+                            industry = v['job_industry']['jobindustry_name'];
+                        }
+                     //  var industry = v['job_industry']['jobindustry_name']
+
+
 
                         html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
                         html += '<div class="card">';
@@ -245,7 +228,7 @@ function allFriend(){
                         if(industry) {
                         html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>';
                         } else {
-                        html += '<div class="fw-bold text-gray-600 mb-6"></div>';}
+                        html += '<div class="fw-bold text-gray-600 mb-6"></div>'};
                         html += '</div>';
                         html += '</div>';
                         html += '</div>';
@@ -254,9 +237,30 @@ function allFriend(){
 
                     });
 
+                    var links = data['friends_all']['links'];
+                    var next_page_url = data['friends_all']['next_page_url'];
+                    var prev_page_url = data['friends_all']['prev_page_url'];
+                    var count_from = data['friends_all']['from'];
+                    var count_to = data['friends_all']['to'];
+                    var total_count = data['friends_all']['total'];
 
+                    paginate ='';
+                    paginate +='<li class="page-item previous">';
+                    paginate +='<a href="'+prev_page_url+'" class="page-link"><i class="previous"></i></a></li>';
+
+                        $.each(links,function(k,va){
+
+                            paginate += '<li class="page-item"><a href="'+va.url+'" class="page-link">'+k+'</a></li>';
+
+                        });
+
+                    paginate +='<li class="page-item next"><a href="'+next_page_url+'" class="page-link"><i class="next"></i></a></li>';
 
                     $('#friend_item').html(html);
+                    $('.pagination').html(paginate);
+                    $('#count_from').html(count_from);
+                    $('#count_to').html(count_to);
+                    $('#total_count').html(total_count);
                     $('.counter').html(counter);
                 }
             });
@@ -266,15 +270,116 @@ function allFriend(){
 allFriend();
 // end: get all friends
 
+
+$(document).on('click', '.pagination a', function(e) {
+    e.preventDefault();
+    var url = $(this).attr('href').split('page=')[1];
+
+    $.ajax({
+                url:'/get-friend?page='+url,
+                type: "GET",
+                dataType:'JSON',
+
+                success:function(data){
+
+                    var baseurl = {!! json_encode(url('/')) !!}
+                    var html = '';
+                    var image_placeholder = baseurl+'/upload/no_image.jpg';
+                    var counter = data['count_all'];
+                    // var pagi = data['friends_all'].links;
+                    // console.log(pagi);
+
+
+                    console.log(data['friends_all']['links']);
+
+                    $.each(data['friends_all']['data'],function(key,v){
+                        var industry = '';
+
+                        if(typeof v['job_industry'] !=='undefined' && v['job_industry'] !==null){
+                            industry = v['job_industry']['jobindustry_name'];
+                        }
+                     //  var industry = v['job_industry']['jobindustry_name']
+
+
+
+                        html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
+                        html += '<div class="card">';
+                        html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
+                        html += '<div class="symbol symbol-65px symbol-circle mb-5">';
+                        if(v.profile_image){
+                        html += '<img src="'+baseurl+'/'+v.profile_image+'" alt="image" />';
+                        }else{
+                        html += '<img src="'+image_placeholder+'" alt="image" />';
+                        }
+                        html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
+                        html += '</div>';
+                        html += '<a href="/friend-directory/friend/'+v.id+'" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.name+'</a>';
+                        if(industry) {
+                        html += '<div class="fw-bold text-gray-600 mb-6">'+industry+'</div>';
+                        } else {
+                        html += '<div class="fw-bold text-gray-600 mb-6"></div>'};
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+
+
+
+                    });
+
+                    var links = data['friends_all']['links'];
+                    var next_page_url = data['friends_all']['next_page_url'];
+                    var prev_page_url = data['friends_all']['prev_page_url'];
+                    var current_count = data['friends_all']['to'];
+                    var total_count = data['friends_all']['total'];
+
+                    paginate ='';
+                    paginate +='<li class="page-item previous">';
+                    paginate +='<a href="'+prev_page_url+'" class="page-link"><i class="previous"></i></a></li>';
+
+                        $.each(links,function(k,va){
+
+                            paginate += '<li class="page-item"><a href="'+va.url+'" class="page-link">'+k+'</a></li>';
+
+                        });
+
+                    paginate +='<li class="page-item next"><a href="'+next_page_url+'" class="page-link"><i class="next"></i></a></li>';
+
+                    $('#friend_item').html(html);
+                    $('.pagination').html(paginate);
+                    $('.counter').html(counter);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
 $(document).on('keyup',function(e){
 
     e.preventDefault();
 
     let search_string = $('#search').val();
 
-    console.log(search_string);
-    var datas ='';
-        $('#property_item').html(datas);
+
+        var ddd ='';
+        $('#property_item').html(ddd);
+
     $.ajax({
         url:"{{route('search.friend')}}",
         method: 'GET',
@@ -314,29 +419,6 @@ $(document).on('keyup',function(e){
 
 });
 
-
-/*
-
-$(document).on('keyup',function(e){
-    e.preventDefault();
-
-    let search_string = $('#search').val();
-
-    $.ajax({
-        url:"",
-        method: 'GET',
-        data: {search_string:search_string},
-
-        success: function(res){
-
-            $('').html(res);
-
-        }
-    });
-})
-
-
-*/
 
 
 $(document).ready(function() {
