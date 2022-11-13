@@ -40,7 +40,7 @@ class FriendDirectoryController extends Controller
 
     public function getAllFriend(){
 
-        $friends['friends_all'] = User::with('jobIndustry')->paginate(2);
+        $friends['friends_all'] = User::with('jobIndustry')->paginate(50);
 
 
         $friends['count_all'] = DB::table('users')->leftjoin('job_industries','job_industries.id','users.job_industry_id')
@@ -58,10 +58,10 @@ class FriendDirectoryController extends Controller
     public function searchFriend(Request $request){
 
         $search_string = $request->search_string;
-        // $searched_friends = User::where('name','like','%'.$request->search_string.'%')->orderBy('id','desc')->orWhere('jobindustry_name','like','%'.$request->search_string.'%')->get();
+
         $searched_friends = User::with('jobIndustry')->where('name','like','%'.$search_string.'%')->whereHas('jobIndustry', function ($query) use ($search_string){
-            $query->orWhere('jobindustry_name', 'like', '%'.$search_string.'%');
-        })->get();
+                $query->orWhere('jobindustry_name', 'like', '%'.$search_string.'%');
+            })->get();
 
 
         return response()->json($searched_friends);
@@ -73,7 +73,7 @@ class FriendDirectoryController extends Controller
     public function filterFriend(Request $request){
 
 
-        $friends_filter = DB::table('users');
+        $friends_filter = User::with('jobIndustry');
 
 
         if($request->job_inudstry){
@@ -108,9 +108,7 @@ class FriendDirectoryController extends Controller
         }
 
 
-        $friends_filter = $friends_filter
-                ->leftjoin('job_industries','job_industries.id','users.job_industry_id')
-                ->get();
+        $friends_filter = $friends_filter->get();
 
         $friends_filter['filter_count'] = count($friends_filter);
 
