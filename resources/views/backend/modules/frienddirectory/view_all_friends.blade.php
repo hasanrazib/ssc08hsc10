@@ -334,7 +334,7 @@ $(document).on('keyup',function(){
 
 
     var dat ='';
-        $('#friend_item').html(dat);
+     $('#friend_item').html(dat);
 
     let search_string = $('#search').val();
 
