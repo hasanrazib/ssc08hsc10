@@ -332,16 +332,13 @@ $(document).on('click', '.pagination a', function(e) {
 
 $(document).on('keyup',function(){
 
-
-    var dat ='';
-     $('#friend_item').html(dat);
-
     let search_string = $('#search').val();
 
     $.ajax({
         url:"{{route('search.friend')}}",
         method: 'GET',
         data: {search_string:search_string},
+
 
         success:function(data){
 

@@ -58,12 +58,17 @@ class FriendDirectoryController extends Controller
     public function searchFriend(Request $request){
 
         $search_string = $request->search_string;
+        $searched_friends = User::with('jobIndustry');
 
-        $searched_friends = User::with('jobIndustry')->where('name','like','%'.$search_string.'%')->whereHas('jobIndustry', function ($query) use ($search_string){
+        if($search_string){
+
+            $searched_friends = $searched_friends->where('name','like','%'.$search_string.'%')->whereHas('jobIndustry', function ($query) use ($search_string){
                 $query->orWhere('jobindustry_name', 'like', '%'.$search_string.'%');
-            })->get();
+            });
+        }
 
 
+        $searched_friends = $searched_friends->get();
         return response()->json($searched_friends);
 
 

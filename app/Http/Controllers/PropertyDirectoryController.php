@@ -19,14 +19,19 @@ class PropertyDirectoryController extends Controller
 
     }
 
-     // get property category ajax
+
+
+    public function getAllProperty(){
+
+        $properties['property_all'] = Property::with('propertyCategory')->paginate(50);
+
+       return response()->json($properties);
+
+    } // end Method
+
+     // get property category ajax filtering
      public function getPropertyDirectory(Request $request){
 
-
-        $property_id = $request->ids;
-        $propertycategories =  Property::with('propertyCategory')->whereIn('property_category_id', $property_id)->get();
-
-        return response()->json($propertycategories);
 
     }// end method
 
