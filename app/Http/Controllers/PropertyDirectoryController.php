@@ -31,6 +31,31 @@ class PropertyDirectoryController extends Controller
     } // end Method
 
 
+    // search
+    public function searchProperty(Request $request){
+
+        $search_string = $request->search_string;
+        $searched_properties = Property::with('propertyCategory');
+
+        if($search_string){
+
+            $searched_properties = $searched_properties->where('property_name','like','%'.$search_string.'%')
+                ->orWhere('property_address','like','%'.$search_string.'%')
+                ->orWhere('property_phone','like','%'.$search_string.'%')
+                    ->whereHas('propertyCategory', function ($query) use ($search_string){
+                    $query->orWhere('property_category_name', 'like', '%'.$search_string.'%');
+            });
+
+        }
+
+
+        $searched_properties = $searched_properties->get();
+
+        return response()->json($searched_properties);
+
+    }
+
+
      // get property category ajax filtering
     public function getPropertyDirectory(Request $request){
 

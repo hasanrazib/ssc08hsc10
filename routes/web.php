@@ -46,7 +46,8 @@ Route::controller(FriendDirectoryController::class)->group(function () {
 Route::controller(PropertyDirectoryController::class)->group(function () {
 
     Route::get('/property-directory/all', 'viewPropertyDirectory')->name('view.property.directory');
-    Route::get('/get-property-directory', 'getPropertyDirectory')->name('get.directory.ajax'); // ajax
+    Route::get('/get-property-search', 'searchProperty')->name('search.property');
+    Route::get('/get-property-directory', 'getPropertyDirectory')->name('get.directory.ajax'); // ajax filtering
     Route::get('/get-property-all-ajax', 'getAllProperty')->name('get.all.property.ajax'); // ajax
 
 });

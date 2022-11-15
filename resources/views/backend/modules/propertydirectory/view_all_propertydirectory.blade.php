@@ -192,6 +192,52 @@ function allProperty(){
 allProperty();
 // end: get all property
 
+$(document).on('keyup',function(){
+
+let search_string = $('#search').val();
+
+$.ajax({
+    url:"{{route('search.property')}}",
+    method: 'GET',
+    data: {search_string:search_string},
+
+
+    success:function(data){
+
+        var baseurl = {!! json_encode(url('/')) !!}
+        var image_placeholder = baseurl+'/upload/no_image.jpg';
+
+        var html = '';
+
+        $.each(data,function(key,v){
+
+            html += '<div class="col-md-6 col-xl-6 col-xxl-6">';
+            html += '<div class="card">';
+            html += '<div class="card-body d-flex flex-center flex-column pt-12 p-9">';
+            html += '<div class="symbol symbol-65px symbol-circle mb-5">';
+            if(v.property_logo){
+            html += '<img src="'+baseurl+'/'+v.property_logo+'" alt="image" />';
+            }else{
+            html += '<img src="'+image_placeholder+'" alt="image" />';
+            }
+
+            html += '<div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>';
+            html += '</div>';
+            html += '<a href="" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">'+v.property_name+'</a>';
+            html += '<div class="fw-bold text-gray-600 mb-6">'+v['property_category']['property_category_name']+'</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+        });
+
+        $('#property_item').html(html);
+    }//success
+
+}); //ajax
+
+});
+
 
 $(document).ready(function() {
 
