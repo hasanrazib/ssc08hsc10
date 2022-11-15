@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\PropertyCategory;
+use DB;
 
 class PropertyDirectoryController extends Controller
 {
@@ -29,9 +30,25 @@ class PropertyDirectoryController extends Controller
 
     } // end Method
 
-     // get property category ajax filtering
-     public function getPropertyDirectory(Request $request){
 
+     // get property category ajax filtering
+    public function getPropertyDirectory(Request $request){
+
+        $pro_cat_id = $request->ids;
+
+        $result = DB::table('properties')
+                    ->join('property_categories','properties.property_category_id','=','property_categories.id');
+
+        if($pro_cat_id){
+
+            $result = $result->whereIn('property_category_id', $pro_cat_id);
+
+        }
+
+
+        $result = $result->get();
+
+        return response()->json($result);
 
     }// end method
 
